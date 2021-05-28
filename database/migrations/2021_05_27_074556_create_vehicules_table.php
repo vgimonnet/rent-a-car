@@ -14,7 +14,7 @@ class CreateVehiculesTable extends Migration
     public function up()
     {
         Schema::create('vehicules', function (Blueprint $table) {
-            $table->immatriculation();
+            $table->id('immatriculation');
             $table->timestamps();
             $table->boolean('disponible');
             $table->float('poids');

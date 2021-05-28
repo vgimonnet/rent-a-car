@@ -14,7 +14,7 @@ class VehiculeController extends Controller
      */
     public function index()
     {
-        //
+        return view('/vehicules', ['vehicules' => Vehicule::paginate(15)]);
     }
 
     /**
