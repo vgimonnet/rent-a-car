@@ -11,9 +11,21 @@ class Contrat extends Model
 
     private $created_at;
     private $updated_at;
-    private $vehicule_id;
-    private $conducteur_id;
-    private $employe_id;
+
+    public function vehicule()
+    {
+      return $this->hasOne('Vehicule');
+    }
+
+    public function conducteur()
+    {
+      return $this->hasOne('Conducteur');
+    }
+
+    public function employe()
+    {
+      return $this->hasOne('Employe');
+    }
 
     public function getVehiculeId(string $vehicule_id)
     {

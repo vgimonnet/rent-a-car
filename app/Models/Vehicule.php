@@ -21,6 +21,11 @@ class Vehicule extends Model
     private $contenanceCoffre;
     private $hauteur;
 
+    public function contrat()
+    {
+        return $this->belongsTo('Contrat');
+    }
+
     public function getDisponible(string $disponible)
     {
         return $this->disponible;

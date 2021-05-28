@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Conducteur extends Model
 {
     use HasFactory;
+
+    public function contrat()
+    {
+        return $this->belongsTo('Contrat');
+    }
 }
