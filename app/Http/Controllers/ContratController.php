@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employe;
+use App\Models\Contrat;
 use Illuminate\Http\Request;
 
-class EmployeController extends Controller
+class ContratController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class EmployeController extends Controller
      */
     public function index()
     {
-        return view('/employes', ['employes' => Employe::paginate(15)]);
+        return view('/contrats', ['contrats' => Contrat::paginate(15)]);
     }
 
     /**
@@ -41,22 +41,22 @@ class EmployeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Employe  $employe
+     * @param  \App\Models\Contrat  $contrat
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $employe = Employe::find($id);
-        return view('/employes', ['employe' => $employe]);
+        $contrat = Contrat::find($id);
+        return view('/contrats', ['contrat' => $contrat]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Employe  $employe
+     * @param  \App\Models\Contrat  $contrat
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employe $employe)
+    public function edit(Contrat $contrat)
     {
         //
     }
@@ -65,10 +65,10 @@ class EmployeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Employe  $employe
+     * @param  \App\Models\Contrat  $contrat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employe $employe)
+    public function update(Request $request, Contrat $contrat)
     {
         //
     }
@@ -76,10 +76,10 @@ class EmployeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Employe  $employe
+     * @param  \App\Models\Contrat  $contrat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employe $employe)
+    public function destroy(Contrat $contrat)
     {
         //
     }

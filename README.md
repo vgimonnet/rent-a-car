@@ -34,4 +34,8 @@ Exécutez la commande suivante :
 > php artisan serve
 
 Puis rendez-vous [ici](http://localhost:8000)
+## Commandes 
 
+```
+php artisan make:model {Modèle} --all
+```
