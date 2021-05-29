@@ -9,5 +9,6 @@ class Employe extends Personne
 {
     use HasFactory;
 
-    protected $table = 'personnes';
+    protected $table = 'employes';
+    protected $primaryKey = 'id_personne';
 }

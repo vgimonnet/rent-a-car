@@ -13,11 +13,11 @@ class Coordonnee extends Model
 
     public function personneMorale()
     {
-        return $this->belongsTo(PersonneMorale::class);
+        return $this->belongsTo(PersonneMorale::class, 'id_personne_morale');
     }
 
     public function personne()
     {
-        return $this->belongsTo(Personne::class);
+        return $this->belongsTo(Personne::class, 'id_personne');
     }
 }

@@ -14,15 +14,16 @@ class CreateCoordonneesTable extends Migration
     public function up()
     {
         Schema::create('coordonnees', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_coordonnee');
             $table->string('email');
-            $table->string('nom');
             $table->string('telephone');
             $table->string('pays');
             $table->string('ville');
             $table->string('adresse');
-            $table->string('complement');
+            $table->string('complement')->nullable();
             $table->integer('codePostal');
+            $table->foreignId('id_personne_morale')->nullable()->constrained('personne_morales')->onDelete('cascade');
+            $table->foreignId('id_personne')->nullable()->constrained('personnes')->onDelete('cascade');
             $table->timestamps();
         });
     }

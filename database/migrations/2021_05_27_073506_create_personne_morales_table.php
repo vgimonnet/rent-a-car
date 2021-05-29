@@ -14,7 +14,7 @@ class CreatePersonneMoralesTable extends Migration
     public function up()
     {
         Schema::create('personne_morales', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_personne_morale');
             $table->string('siret');
             $table->string('societe');
             $table->timestamps();

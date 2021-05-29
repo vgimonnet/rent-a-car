@@ -12,6 +12,17 @@ class PersonneMorale extends Model
     protected $primaryKey = 'id_personne_morale';
 
     public function coordonnee() {
-        return $this->hasOne(Coordonnee::class);
+        return $this->hasOne(Coordonnee::class, 'id_coordonnee');
+    }
+
+    public function conducteurs() {
+        return $this->hasMany(Conducteur::class, 'id_personne');
+    }
+
+    public function delete() {
+        // $this->conducteurs()->delete();
+        $this->coordonnee()->delete();
+
+        return parent::delete();
     }
 }
