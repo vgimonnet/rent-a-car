@@ -9,8 +9,6 @@ class Employe extends Personne
 {
     use HasFactory;
 
-    protected $table = 'personnes';
-
     public function contrat()
     {
         return $this->belongsTo('Contrat');

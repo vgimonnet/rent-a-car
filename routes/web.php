@@ -29,16 +29,26 @@ Route::get('/dashboard', function () {
 
 Route::get('/contrats', [ContratController::class, 'index']);
 
+Route::get('/contrats/{id}', [ContratController::class, 'show']);
+
 Route::get('/vehicules', [VehiculeController::class, 'index']);
 
 Route::get('/vehicules/{id}', [VehiculeController::class, 'show']);
 
 Route::get('/conducteurs', [ConducteurController::class, 'index']);
 
+Route::get('/conducteurs/{id}', [ConducteurController::class, 'show']);
+
 Route::get('/controles-technique', [ControleTechniqueController::class, 'index']);
+
+Route::get('/controles-technique/{id}', [ControleTechniqueController::class, 'show']);
 
 Route::get('/controles-etat', [ControleEtatController::class, 'index']);
 
+Route::get('/controles-etat/{id}', [ControleEtatController::class, 'show']);
+
 Route::get('/employes', [EmployeController::class, 'index']);
+
+Route::get('/employes/{id}', [EmployeController::class, 'show']);
 
 require __DIR__.'/auth.php';
