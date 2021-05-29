@@ -35,7 +35,20 @@ class VehiculeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $vehicule = new Vehicule;
+        $vehicule->disponible = true;
+        $vehicule->immatriculation = $request->immatriculation;
+        $vehicule->marque = $request->marque;
+        $vehicule->modele = $request->modele;
+        $vehicule->couleur = $request->couleur;
+        $vehicule->poids = $request->poids;
+        $vehicule->hauteur = $request->hauteur;
+        $vehicule->places = $request->places;
+        $vehicule->cout_par_jour = $request->coutParJour;
+        $vehicule->date_achat = $request->dateAchat;
+        $vehicule->contenance_coffre = $request->contenanceCoffre;
+        $vehicule->save();
+        return redirect()->route('dashboard');
     }
 
     /**

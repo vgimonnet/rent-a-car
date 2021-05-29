@@ -35,6 +35,8 @@ Route::get('/vehicules', [VehiculeController::class, 'index']);
 
 Route::get('/vehicules/{id}', [VehiculeController::class, 'show']);
 
+Route::post('/vehicules/new', [VehiculeController::class, 'store']);
+
 Route::get('/conducteurs', [ConducteurController::class, 'index']);
 
 Route::get('/conducteurs/{id}', [ConducteurController::class, 'show']);
