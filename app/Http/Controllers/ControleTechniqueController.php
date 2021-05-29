@@ -44,9 +44,10 @@ class ControleTechniqueController extends Controller
      * @param  \App\Models\ControleTechnique  $controleTechnique
      * @return \Illuminate\Http\Response
      */
-    public function show(ControleTechnique $controleTechnique)
+    public function show($id)
     {
-        //
+        $controle = ControleTechnique::find($id);
+        return view('/controles-technique', ['controleTechnique' => $controle]);
     }
 
     /**

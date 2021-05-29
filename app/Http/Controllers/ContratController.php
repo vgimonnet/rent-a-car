@@ -44,9 +44,10 @@ class ContratController extends Controller
      * @param  \App\Models\Contrat  $contrat
      * @return \Illuminate\Http\Response
      */
-    public function show(Contrat $contrat)
+    public function show($id)
     {
-        //
+        $contrat = Contrat::find($id);
+        return view('/contrats', ['contrat' => $contrat]);
     }
 
     /**

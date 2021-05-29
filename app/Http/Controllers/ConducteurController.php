@@ -44,9 +44,10 @@ class ConducteurController extends Controller
      * @param  \App\Models\Conducteur  $conducteur
      * @return \Illuminate\Http\Response
      */
-    public function show(Conducteur $conducteur)
+    public function show($id)
     {
-        //
+        $conducteur = Conducteur::find($id);
+        return view('/conducteurs', ['conducteur' => $conducteur]);
     }
 
     /**

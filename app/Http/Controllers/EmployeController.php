@@ -44,9 +44,10 @@ class EmployeController extends Controller
      * @param  \App\Models\Employe  $employe
      * @return \Illuminate\Http\Response
      */
-    public function show(Employe $employe)
+    public function show($id)
     {
-        //
+        $employe = Employe::find($id);
+        return view('/employes', ['employe' => $employe]);
     }
 
     /**

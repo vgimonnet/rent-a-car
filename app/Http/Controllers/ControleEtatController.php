@@ -44,9 +44,10 @@ class ControleEtatController extends Controller
      * @param  \App\Models\ControleEtat  $controleEtat
      * @return \Illuminate\Http\Response
      */
-    public function show(ControleEtat $controleEtat)
+    public function show($id)
     {
-        //
+        $controle = ControleEtat::find($id);
+        return view('/controles-etat', ['controleEtat' => $controle]);
     }
 
     /**
