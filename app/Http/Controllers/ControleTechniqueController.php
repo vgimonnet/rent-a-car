@@ -14,7 +14,7 @@ class ControleTechniqueController extends Controller
      */
     public function index()
     {
-        //
+        return view('/controles-technique', ['controlesTechnique' => ControleTechnique::paginate(15)]);
     }
 
     /**

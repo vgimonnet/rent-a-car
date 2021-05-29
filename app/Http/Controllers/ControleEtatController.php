@@ -14,7 +14,7 @@ class ControleEtatController extends Controller
      */
     public function index()
     {
-        //
+        return view('/controles-etat', ['controlesEtat' => ControleEtat::paginate(15)]);
     }
 
     /**

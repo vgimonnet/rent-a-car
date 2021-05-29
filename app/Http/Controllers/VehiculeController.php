@@ -44,9 +44,10 @@ class VehiculeController extends Controller
      * @param  \App\Models\Vehicule  $vehicule
      * @return \Illuminate\Http\Response
      */
-    public function show(Vehicule $vehicule)
+    public function show($id)
     {
-        //
+        $vehicule = Vehicule::find($id);
+        return view('/vehicules', ['vehicule' => $vehicule]);
     }
 
     /**

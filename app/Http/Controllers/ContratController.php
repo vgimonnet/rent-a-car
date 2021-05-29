@@ -14,7 +14,7 @@ class ContratController extends Controller
      */
     public function index()
     {
-        //
+        return view('/contrats', ['contrats' => Contrat::paginate(15)]);
     }
 
     /**

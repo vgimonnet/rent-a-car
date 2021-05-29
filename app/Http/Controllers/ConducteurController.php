@@ -14,7 +14,7 @@ class ConducteurController extends Controller
      */
     public function index()
     {
-        //
+        return view('/conducteurs', ['conducteurs' => Conducteur::paginate(15)]);
     }
 
     /**

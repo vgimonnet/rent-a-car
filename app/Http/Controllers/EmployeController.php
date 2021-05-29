@@ -14,7 +14,7 @@ class EmployeController extends Controller
      */
     public function index()
     {
-        //
+        return view('/employes', ['employes' => Employe::paginate(15)]);
     }
 
     /**
