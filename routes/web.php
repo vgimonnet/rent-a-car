@@ -30,7 +30,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-<<<<<<< HEAD
 Route::get('/client', function () {
     return view('client', ['personnesMorales' => PersonneMorale::all(), 'personnesPhysiques' => Conducteur::where('estParticulier', true)]);
 })->middleware(['auth'])->name('client');
@@ -42,7 +41,7 @@ Route::get('/modifier/client/personne_morale/{id}', [PersonneMoraleController::c
 Route::post('/modifier/client/personne_morale/{id}', [PersonneMoraleController::class, 'update'])->middleware(['auth'])->name('ModifierPersonneMorale');
 
 Route::get('/supprimer/client/personne_morale/{id}', [PersonneMoraleController::class, 'destroy'])->middleware(['auth'])->name('SupprimerPersonneMorale');
-=======
+
 Route::get('/contrats', [ContratController::class, 'index']);
 
 Route::get('/contrats/{id}', [ContratController::class, 'show']);
@@ -68,6 +67,5 @@ Route::get('/controles-etat/{id}', [ControleEtatController::class, 'show']);
 Route::get('/employes', [EmployeController::class, 'index']);
 
 Route::get('/employes/{id}', [EmployeController::class, 'show']);
->>>>>>> origin/main
 
 require __DIR__.'/auth.php';

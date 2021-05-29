@@ -9,13 +9,11 @@ class Employe extends Personne
 {
     use HasFactory;
 
-<<<<<<< HEAD
     protected $table = 'employes';
     protected $primaryKey = 'id_personne';
-=======
+    
     public function contrat()
     {
         return $this->belongsTo('Contrat');
     }
->>>>>>> origin/main
 }
