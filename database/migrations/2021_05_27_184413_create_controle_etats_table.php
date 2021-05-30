@@ -16,6 +16,11 @@ class CreateControleEtatsTable extends Migration
         Schema::create('controle_etats', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->date('date');
+            $table->integer('kilometrage');
+            $table->string('etat_exterieur');
+            $table->string('etat_interieur');
+            $table->boolean('frais_a_prevoir');
         });
     }
 

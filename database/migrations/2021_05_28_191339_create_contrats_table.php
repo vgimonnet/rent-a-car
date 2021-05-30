@@ -16,9 +16,9 @@ class CreateContratsTable extends Migration
         Schema::create('contrats', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('vehicule_id')->references('immatriculation')->on('vehicules');
-            $table->foreignId('conducteur_id')->references('id')->on('conducteurs');
-            $table->foreignId('employe_id')->references('id')->on('employes');
+            //$table->foreignId('vehicule_id')->references('immatriculation')->on('vehicules');
+            //$table->foreignId('conducteur_id')->references('id')->on('conducteurs');
+            //$table->foreignId('employe_id')->references('id')->on('employes');
         });
     }
 

@@ -36,13 +36,13 @@ class ContratController extends Controller
         $conducteurs = [];
 
         foreach (Conducteur::all() as $conducteur) {
-          $conducteurs[$conducteur->id] = $conducteur->id;
+          $conducteurs[$conducteur->id] = $conducteur->prenom;
         }
 
         $employes = [];
 
         foreach (Employe::all() as $employe) {
-          $employes[$employe->id] = $employe->id;
+          $employes[$employe->id] = $employe->prenom;
         }
 
         return view(

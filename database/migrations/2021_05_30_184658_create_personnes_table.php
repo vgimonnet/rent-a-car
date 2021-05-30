@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePersonneMoralesTable extends Migration
+class CreatePersonnesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreatePersonneMoralesTable extends Migration
      */
     public function up()
     {
-        Schema::create('personne_morales', function (Blueprint $table) {
-            $table->id('id_personne_morale');
-            $table->string('siret');
-            $table->string('societe');
+        Schema::create('personnes', function (Blueprint $table) {
+            $table->id('id_personne');
+            $table->string('prenom');
+            $table->string('permis');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreatePersonneMoralesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personne_morales');
+        //
     }
 }

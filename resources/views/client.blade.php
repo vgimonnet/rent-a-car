@@ -22,9 +22,9 @@
                     </nav>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">                    
                         <section>
-                            <h3 class="mt-10 mb-5">Personnes morales :</h3>
+                            <h3 class="mt-10 mb-5">Personnes morale :</h3>
                             <ul>
-                                @foreach ($personnesMorales as $personne)
+                                @foreach ($personnesMorale as $personne)
                                     <li class="flex">
                                         {{ $personne->societe }}
                                         <div class="ml-auto">

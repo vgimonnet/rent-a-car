@@ -31,7 +31,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/client', function () {
-    return view('client', ['personnesMorales' => PersonneMorale::all(), 'personnesPhysiques' => Conducteur::where('estParticulier', true)]);
+    return view('client', ['personnesMorale' => PersonneMorale::all(), 'personnesPhysiques' => Conducteur::where('estParticulier', true)]);
 })->middleware(['auth'])->name('client');
 
 Route::get('/ajouter/client/personne_morale', [PersonneMoraleController::class, 'create'])->middleware(['auth'])->name('AjouterPersonneMorale');

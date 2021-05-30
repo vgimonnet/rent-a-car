@@ -22,8 +22,8 @@ class CreateCoordonneesTable extends Migration
             $table->string('adresse');
             $table->string('complement')->nullable();
             $table->integer('codePostal');
-            $table->foreignId('id_personne_morale')->nullable()->constrained('personne_morales')->onDelete('cascade');
-            $table->foreignId('id_personne')->nullable()->constrained('personnes')->onDelete('cascade');
+            //$table->foreignId('id_personne_morale')->constrained();
+            //$table->foreignId('id_personne')->constrained();
             $table->timestamps();
         });
     }
