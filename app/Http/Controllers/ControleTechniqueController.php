@@ -24,7 +24,13 @@ class ControleTechniqueController extends Controller
      */
     public function create()
     {
-        //
+        return view(
+          'components/forms/form-controle-technique',
+          [
+            'redirect' => 'ajouterControleTechnique',
+            'controleTechnique' => null,
+          ]
+        );
     }
 
     /**
@@ -35,7 +41,22 @@ class ControleTechniqueController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+          'conforme' => 'accepted',
+          'dateControle' => 'required|min:1',
+          'contreVisite' => 'accepted',
+          'dateContreVisite' => 'required|min:1',
+          'commentaire' => 'required|min:1',
+        ]);
+
+        $controle = new ControleTechnique;
+        $controle->conforme = ($request->conforme === 'on') ? 1 : 0;
+        $controle->date_controle = $request->dateControle;
+        $controle->contre_visite = ($request->contreVisite === 'on') ? 1 : 0;
+        $controle->date_contre_visite = $request->dateContreVisite;
+        $controle->commentaire = $request->commentaire;
+        $controle->save();
+        return redirect()->route('controlesTechnique');
     }
 
     /**
@@ -47,7 +68,7 @@ class ControleTechniqueController extends Controller
     public function show($id)
     {
         $controle = ControleTechnique::find($id);
-        return view('/controles-technique', ['controleTechnique' => $controle]);
+        return view('/components/single', ['single' => $controle]);
     }
 
     /**
@@ -56,9 +77,15 @@ class ControleTechniqueController extends Controller
      * @param  \App\Models\ControleTechnique  $controleTechnique
      * @return \Illuminate\Http\Response
      */
-    public function edit(ControleTechnique $controleTechnique)
+    public function edit($id)
     {
-        //
+        return view(
+          'components/forms/form-controle-technique',
+          [
+            'redirect' => 'modifierControleTechnique',
+            'controleTechnique' => ControleTechnique::find($id)
+          ]
+        );
     }
 
     /**
@@ -70,7 +97,22 @@ class ControleTechniqueController extends Controller
      */
     public function update(Request $request, ControleTechnique $controleTechnique)
     {
-        //
+        $validated = $request->validate([
+          'conforme' => 'required|integer',
+          'date_controle' => 'required|min:1',
+          'contre_visite' => 'required|integer',
+          'date_contre_visite' => 'required|min:1',
+          'commentaire' => 'required|min:1',
+        ]);
+
+        $controle = new ControleTechnique;
+        $controle->conforme = $request->conforme;
+        $controle->dateControle = $request->dateControle;
+        $controle->contreVisite = $request->contreVisite;
+        $controle->dateContreVisite = $request->dateContreVisite;
+        $controle->commentaire = $request->commentaire;
+        $controle->save();
+        return redirect()->route('controlesTechnique');
     }
 
     /**
@@ -79,8 +121,10 @@ class ControleTechniqueController extends Controller
      * @param  \App\Models\ControleTechnique  $controleTechnique
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ControleTechnique $controleTechnique)
+    public function destroy($id)
     {
-        //
+        ControleTechnique::find($id)->delete();
+
+        return redirect()->route('controlesTechnique');
     }
 }

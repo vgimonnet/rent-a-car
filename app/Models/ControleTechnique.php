@@ -9,7 +9,6 @@ class ControleTechnique extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id_controle_technique';
     private $conforme;
     private $dateControle;
     private $contreVisite;

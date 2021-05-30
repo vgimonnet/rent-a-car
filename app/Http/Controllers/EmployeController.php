@@ -24,7 +24,13 @@ class EmployeController extends Controller
      */
     public function create()
     {
-        //
+        return view(
+          'components/forms/form-employe',
+          [
+            'redirect' => 'ajouterEmploye',
+            'employe' => null,
+          ]
+        );
     }
 
     /**
@@ -35,7 +41,19 @@ class EmployeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+          'prenom' => 'required|min:1',
+          'permis' => 'required|min:1',
+          'poste' => 'required|min:1',
+        ]);
+
+        $employe = new Employe;
+        $employe->prenom = $request->prenom;
+        $employe->permis = $request->permis;
+        $employe->poste = $request->permis;
+
+        $employe->save();
+        return redirect()->route('employes');
     }
 
     /**
@@ -56,9 +74,15 @@ class EmployeController extends Controller
      * @param  \App\Models\Employe  $employe
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employe $employe)
+    public function edit($id)
     {
-        //
+        return view(
+          'components/forms/form-employe',
+          [
+            'redirect' => 'modifierEmploye',
+            'employe' => Employe::find($id)
+          ]
+        );
     }
 
     /**
@@ -68,9 +92,21 @@ class EmployeController extends Controller
      * @param  \App\Models\Employe  $employe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employe $employe)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+          'prenom' => 'required|min:1',
+          'permis' => 'required|min:1',
+          'poste' => 'required|min:1',
+        ]);
+
+        $employe = Employe::find($id);
+        $employe->prenom = $request->prenom;
+        $employe->permis = $request->permis;
+        $employe->poste = $request->permis;
+        $employe->save();
+
+        return redirect()->route('employes');
     }
 
     /**
@@ -79,8 +115,10 @@ class EmployeController extends Controller
      * @param  \App\Models\Employe  $employe
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employe $employe)
+    public function destroy($id)
     {
-        //
+        Employe::find($id)->delete();
+
+        return redirect()->route('employes');
     }
 }

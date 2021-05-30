@@ -10,7 +10,6 @@ class Employe extends Personne
     use HasFactory;
 
     protected $table = 'employes';
-    protected $primaryKey = 'id_personne';
     
     public function contrat()
     {

@@ -14,25 +14,4 @@
             </div>
         </div>
     </div>
-
-    <ul>
-      <li>
-        <a href="./vehicules">Véhicules</a>
-      </li>
-      <li>
-        <a href="./employes">Employés</a>
-      </li>
-      <li>
-        <a href="./conducteurs">Conducteurs</a>
-      </li>
-      <li>
-        <a href="./contrats">Contrats</a>
-      </li>
-      <li>
-        <a href="./controles-etat">Controles d'états</a>
-      </li>
-      <li>
-        <a href="./controles-technique">Controles technique</a>
-      </li>
-    </ul>
 </x-app-layout>

@@ -18,6 +18,18 @@
                     <x-nav-link :href="route('client')" :active="request()->routeIs('client')">
                         {{ __('Client') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('vehicules')" :active="request()->routeIs('vehicules')">
+                        {{ __('Véhicules') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('controlesTechnique')" :active="request()->routeIs('controlesTechnique')">
+                        {{ __('Controles Technique') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('controlesEtat')" :active="request()->routeIs('controlesEtat')">
+                        {{ __('Controles Etat') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('employes')" :active="request()->routeIs('employes')">
+                        {{ __('Employés') }}
+                    </x-nav-link>
                 </div>
             </div>
 

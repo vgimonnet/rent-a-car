@@ -1,35 +1,34 @@
-@if(isset($vehicules))
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Véhicules') }}
+        </h2>
+    </x-slot>
 
-{{ Form::open(['url' => 'vehicules/new']) }}
-  {{ Form::text('immatriculation', null, ['placeholder' => 'Immatriculation']) }}
-  {{ Form::text('marque', null, ['placeholder' => 'Marque']) }}
-  {{ Form::text('modele', null, ['placeholder' => 'Modèle']) }}
-  {{ Form::text('couleur', null, ['placeholder' => 'Couleur']) }}
-  {{ Form::text('poids', null, ['placeholder' => 'Poids']) }}
-  {{ Form::text('hauteur', null, ['placeholder' => 'Hauteur']) }}
-  {{ Form::text('places', null, ['placeholder' => 'Places']) }}
-  {{ Form::text('coutParJour', null, ['placeholder' => 'Cout par jour']) }}
-  {{ Form::date('dateAchat', null, ['placeholder' => 'Date Achat']) }}
-  {{ Form::text('contenanceCoffre', null, ['placeholder' => 'Contenance coffre']) }}
-  {{ Form::submit('Envoyer') }}
-{{ Form::close() }}
-
-<ul>
-  @foreach($vehicules as $vehicule)
-    <li>
-      <a href="vehicules/{{ $vehicule->immatriculation }}">{{ $vehicule->immatriculation }}</a> -
-      <a href="vehicules/{{ $vehicule->immatriculation }}?edit=true">Modifier</a> -
-      <a href="vehicules/{{ $vehicule->immatriculation }}?delete=true">Supprimer</a>
-    </li>
-  @endforeach
-</ul>
-{{ $vehicules->render() }}
-@elseif(Request::get('edit'))
-  <h1>Edit</h1>
-  {{ $vehicule }}
-@elseif(Request::get('delete'))
-  <h1>Delete</h1>
-  {{ $vehicule }}
-@else
-  {{ $vehicule }}
-@endif
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <nav class="text-center">
+                        <x-nav-link :href="route('ajouterVehicule')">
+                            {{ __('Ajouter un véhicule') }}
+                        </x-nav-link>
+                    </nav>
+                    <h3 class="mt-10 mb-5">Véhicules :</h3>
+                    <ul class="grid grid-cols-1 gap-10">
+                        @foreach($vehicules as $vehicule)
+                            <li class="flex">
+                                <a href="{{ route('vehicule', $vehicule->immatriculation) }}">{{ $vehicule->immatriculation }}</a>
+                                <div class="ml-auto">
+                                    <a href="{{ route('modifierVehicule', $vehicule->immatriculation) }}">Modifier</a>
+                                    <a href="{{ route('supprimerVehicule', $vehicule->immatriculation) }}">Supprimer</a>
+                                    <!-- TODO : ajouter garde fou, modal de confirmation ? -->
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
