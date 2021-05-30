@@ -17,8 +17,10 @@ class CreateContratsTable extends Migration
             $table->id('id_contrat');
             $table->timestamps();
             /* L'ajout de foreign key ne fonctionne pas si la déclaration se fait avant la création de la table en question */
-            $table->foreignId('immatriculation');//->references('immatriculation')->on('vehicules');
-            $table->foreignId('id_conducteur');//->references('id_conducteur')->on('conducteurs');
+            /* Ci-dessous fonctionne */
+            $table->foreignId('immatriculation')->nullable()->references('immatriculation')->on('vehicules')->onDelete('cascade');
+            /* Ci dessous ne fonctionne pas */
+            $table->foreignId('id_conducteur');//->nullable()->references('id_conducteur')->on('conducteurs')->onDelete('cascade');
             $table->foreignId('id_employe');//->references('id_employe')->on('employes');;
             $table->date('date_debut');
             $table->date('date_retour');
