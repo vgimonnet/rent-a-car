@@ -14,11 +14,17 @@ class CreateContratsTable extends Migration
     public function up()
     {
         Schema::create('contrats', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_contrat');
             $table->timestamps();
-            //$table->foreignId('vehicule_id')->references('immatriculation')->on('vehicules');
-            //$table->foreignId('conducteur_id')->references('id')->on('conducteurs');
-            //$table->foreignId('employe_id')->references('id')->on('employes');
+            /* L'ajout de foreign key ne fonctionne pas si la déclaration se fait avant la création de la table en question */
+            $table->foreignId('immatriculation');//->references('immatriculation')->on('vehicules');
+            $table->foreignId('id_conducteur');//->references('id_conducteur')->on('conducteurs');
+            $table->foreignId('id_employe');//->references('id_employe')->on('employes');;
+            $table->date('date_debut');
+            $table->date('date_retour');
+            $table->string('motif');
+            $table->integer('montant');
+            $table->integer('montant_paye');
         });
     }
 

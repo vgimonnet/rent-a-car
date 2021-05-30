@@ -26,6 +26,7 @@ class CreateVehiculesTable extends Migration
             $table->tinyInteger('places');
             $table->float('contenance_coffre');
             $table->string('hauteur');
+            $table->foreignId('id_controle_technique');//->references('id_controle_technique')->on('controles_technique');
         });
     }
 

@@ -13,14 +13,15 @@ class CreateControleEtatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('controle_etats', function (Blueprint $table) {
-            $table->id();
+        Schema::create('controles_etat', function (Blueprint $table) {
+            $table->id('id_controle_etat');
             $table->timestamps();
             $table->date('date');
             $table->integer('kilometrage');
             $table->string('etat_exterieur');
             $table->string('etat_interieur');
             $table->boolean('frais_a_prevoir');
+            $table->foreignId('id_employe');//->references('id_employe')->on('employes');;
         });
     }
 

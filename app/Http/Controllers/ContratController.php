@@ -72,9 +72,9 @@ class ContratController extends Controller
         ]);
 
         $contrat = new Contrat;
-        $contrat->vehicule_id = $request->vehiculeId;
-        $contrat->conducteur_id = $request->conducteurId;
-        $contrat->employe_id = $request->employeId;
+        $contrat->id_vehicule = $request->vehiculeId;
+        $contrat->id_conducteur = $request->conducteurId;
+        $contrat->id_employe = $request->employeId;
         $contrat->save();
         return redirect()->route('contrats');
     }
