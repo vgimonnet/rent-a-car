@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contrat;
+use App\Models\Vehicule;
+use App\Models\Conducteur;
+use App\Models\Employe;
 use Illuminate\Http\Request;
 
 class ContratController extends Controller
@@ -24,11 +27,32 @@ class ContratController extends Controller
      */
     public function create()
     {
+        $vehicules = [];
+
+        foreach (Vehicule::all() as $vehicule) {
+          $vehicules[$vehicule->immatriculation] = $vehicule->immatriculation;
+        }
+
+        $conducteurs = [];
+
+        foreach (Conducteur::all() as $conducteur) {
+          $conducteurs[$conducteur->id] = $conducteur->id;
+        }
+
+        $employes = [];
+
+        foreach (Employe::all() as $employe) {
+          $employes[$employe->id] = $employe->id;
+        }
+
         return view(
           'components/forms/form-contrat',
           [
             'redirect' => 'ajouterContrat',
             'contrat' => null,
+            'vehicules' => $vehicules,
+            'conducteurs' => $conducteurs,
+            'employes' => $employes
           ]
         );
     }

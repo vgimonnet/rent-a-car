@@ -42,7 +42,7 @@ class VehiculeController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-          'immatriculation' => 'required|min:7',
+          'immatriculation' => 'required|min:1',
           'marque' => 'required|min:1',
           'modele' => 'required|min:1',
           'couleur' => 'required|min:1',
@@ -110,7 +110,7 @@ class VehiculeController extends Controller
     {
         
         $validated = $request->validate([
-          'immatriculation' => 'required|min:7',
+          'immatriculation' => 'required|min:1',
           'marque' => 'required|min:1',
           'modele' => 'required|min:1',
           'couleur' => 'required|min:1',

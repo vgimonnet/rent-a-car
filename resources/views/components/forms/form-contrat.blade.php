@@ -31,9 +31,9 @@
                     @endphp
                     {!! Form::open(['route' => $redirect]) !!}
                         <div class="grid grid-cols-1 md:grid-cols-2">
-                            {{ Form::text('vehiculeId', $contrat ? $contrat->vehiculeId : null, ['placeholder' => 'Id véhicule']) }}
-                            {{ Form::text('conducteurId', $contrat ? $contrat->conducteurId : null, ['placeholder' => 'Id conducteur']) }}
-                            {{ Form::text('employeId', $contrat ? $contrat->employeId : null, ['placeholder' => 'Id employé']) }}
+                            {{ Form::select('vehiculeId', $vehicules) }}
+                            {{ Form::select('conducteurId', $conducteurs) }}
+                            {{ Form::select('employeId', $employes) }}
                         </div>
                         <div class="text-center w-full">
                             {{ Form::submit($contrat ? 'Modifier' : 'Ajouter') }}
