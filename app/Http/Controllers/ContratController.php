@@ -24,7 +24,13 @@ class ContratController extends Controller
      */
     public function create()
     {
-        //
+        return view(
+          'components/forms/form-contrat',
+          [
+            'redirect' => 'ajouterContrat',
+            'contrat' => null,
+          ]
+        );
     }
 
     /**
@@ -35,7 +41,18 @@ class ContratController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+          'vehiculeId' => 'required|min:1',
+          'conducteurId' => 'required|min:1',
+          'employeId' => 'required|min:1'
+        ]);
+
+        $contrat = new Contrat;
+        $contrat->vehicule_id = $request->vehiculeId;
+        $contrat->conducteur_id = $request->conducteurId;
+        $contrat->employe_id = $request->employeId;
+        $contrat->save();
+        return redirect()->route('contrats');
     }
 
     /**
@@ -56,9 +73,15 @@ class ContratController extends Controller
      * @param  \App\Models\Contrat  $contrat
      * @return \Illuminate\Http\Response
      */
-    public function edit(Contrat $contrat)
+    public function edit($id)
     {
-        //
+        return view(
+          'components/forms/form-contrat',
+          [
+            'redirect' => 'modifierContrat',
+            'contrat' => Contrat::find($id)
+          ]
+        );
     }
 
     /**
@@ -68,9 +91,20 @@ class ContratController extends Controller
      * @param  \App\Models\Contrat  $contrat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contrat $contrat)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+          'vehiculeId' => 'required|min:1',
+          'conducteurId' => 'required|min:1',
+          'employeId' => 'required|min:1'
+        ]);
+
+        $contrat = Contrat::find($id);
+        $contrat->vehicule_id = $request->vehiculeId;
+        $contrat->conducteur_id = $request->conducteurId;
+        $contrat->employe_id = $request->employeId;
+        $contrat->save();
+        return redirect()->route('contrats');
     }
 
     /**
@@ -79,8 +113,10 @@ class ContratController extends Controller
      * @param  \App\Models\Contrat  $contrat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contrat $contrat)
+    public function destroy($id)
     {
-        //
+        Contrat::find($id);
+
+        return redirect()->route('contrats');
     }
 }

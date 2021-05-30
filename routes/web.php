@@ -42,9 +42,13 @@ Route::post('/modifier/client/personne_morale/{id}', [PersonneMoraleController::
 
 Route::get('/supprimer/client/personne_morale/{id}', [PersonneMoraleController::class, 'destroy'])->middleware(['auth'])->name('SupprimerPersonneMorale');
 
-Route::get('/contrats', [ContratController::class, 'index']);
-
-Route::get('/contrats/{id}', [ContratController::class, 'show']);
+Route::get('/contrats', [ContratController::class, 'index'])->name('contrats');
+Route::get('/contrats/new', [ContratController::class, 'create'])->middleware(['auth'])->name('ajouterContrat');
+Route::post('/contrats/new', [ContratController::class, 'store'])->middleware(['auth'])->name('ajouterContrat');
+Route::get('/contrats/edit/{id}', [ContratController::class, 'edit'])->middleware(['auth'])->name('modifierContrat');
+Route::post('/contrats/edit/{id}', [ContratController::class, 'update'])->middleware(['auth'])->name('modifierContrat');
+Route::get('/contrats/delete/{id}', [ContratController::class, 'destroy'])->middleware(['auth'])->name('supprimerContrat');
+Route::get('/contrats/{id}', [ContratController::class, 'show'])->name('contrat');
 
 Route::get('/vehicules', [VehiculeController::class, 'index'])->name('vehicules');
 Route::get('/vehicules/new', [VehiculeController::class, 'create'])->middleware(['auth'])->name('ajouterVehicule');
