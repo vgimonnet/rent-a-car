@@ -9,11 +9,18 @@ class ControleEtat extends Model
 {
     use HasFactory;
 
+    protected $table = 'controles_etat';
+    protected $primaryKey = 'id_controle_etat';
     private $date;
     private $kilometrage;
     private $etatExterieur;
     private $etatInterieur;
     private $fraisAPrevoir;
+
+    public function employe()
+    {
+      return $this->hasOne(Employe::class);
+    }
 
     public function getDate(string $date)
     {

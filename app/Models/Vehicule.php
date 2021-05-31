@@ -9,6 +9,7 @@ class Vehicule extends Model
 {
     use HasFactory;
 
+    protected $table = 'vehicules';
     protected $primaryKey = 'immatriculation';
     private $disponible;
     private $poids;
@@ -24,6 +25,11 @@ class Vehicule extends Model
     public function contrat()
     {
         return $this->belongsTo('Contrat');
+    }
+
+    public function controle_technique()
+    {
+        return $this->belongsTo(ControleTechnique::class);
     }
 
     public function getDisponible(string $disponible)

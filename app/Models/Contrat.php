@@ -9,22 +9,24 @@ class Contrat extends Model
 {
     use HasFactory;
 
+    protected $table = 'contrats';
+    protected $primaryKey = 'id_contrat';
     private $created_at;
     private $updated_at;
 
     public function vehicule()
     {
-      return $this->hasOne('Vehicule');
+      return $this->hasOne(Vehicule::class, 'id_vehicule');
     }
 
     public function conducteur()
     {
-      return $this->hasOne('Conducteur');
+      return $this->hasOne(Conducteur::class, 'id_conducteur');
     }
 
     public function employe()
     {
-      return $this->hasOne('Employe');
+      return $this->hasOne(Employe::class, 'id_conducteur');
     }
 
     public function getVehiculeId(string $vehicule_id)

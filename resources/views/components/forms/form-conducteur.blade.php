@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Ajout de controle technique
+            Ajout de conducteur
         </h2>
     </x-slot>
 
@@ -22,24 +22,18 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     @php
-                        if ($redirect == 'modifierControleTechnique') {
-                            $redirect = array($redirect, $controleTechnique->id_controle_technique);
+                        if ($redirect == 'modifierConducteur') {
+                            $redirect = array($redirect, $conducteur->id_conducteur);
                         }
-                        if (!isset($controleTechnique)) {
-                            $controleTechnique = null;
+                        if (!isset($conducteur)) {
+                            $conducteur = null;
                         }
                     @endphp
                     {!! Form::open(['route' => $redirect]) !!}
                         <div class="grid grid-cols-1 md:grid-cols-2">
-                            {{ Form::select('immatriculation', $vehicules) }}
-                            {{ Form::checkbox('conforme', $controleTechnique ? $controleTechnique->conforme : null, ['placeholder' => 'Conforme']) }}
-                            {{ Form::date('dateControle', $controleTechnique ? $controleTechnique->dateControle : null, ['placeholder' => 'Date controle technique']) }}
-                            {{ Form::checkbox('contreVisite', $controleTechnique ? $controleTechnique->contreVisite : null, ['placeholder' => 'Contre visite']) }}
-                            {{ Form::date('dateContreVisite', $controleTechnique ? $controleTechnique->dateContreVisite : null, ['placeholder' => 'Date contre visite']) }}
-                            {{ Form::textarea('commentaire', $controleTechnique ? $controleTechnique->commentaire : null, ['placeholder' => 'Commentaire']) }}
-                        </div>
+                          {{ Form::checkbox('est_particulier', $conducteur ? $conducteur->est_particulier : null, ['placeholder' => 'Particulier']) }}                        </div>
                         <div class="text-center w-full">
-                            {{ Form::submit($controleTechnique ? 'Modifier' : 'Ajouter') }}
+                            {{ Form::submit($conducteur ? 'Modifier' : 'Ajouter') }}
                         </div>
                     {!! Form::close() !!}
                 </div>

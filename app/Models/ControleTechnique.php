@@ -9,11 +9,18 @@ class ControleTechnique extends Model
 {
     use HasFactory;
 
+    protected $table = 'controles_technique';
+    protected $primaryKey = 'id_controle_technique';
     private $conforme;
     private $dateControle;
     private $contreVisite;
     private $dateContreVisite;
     private $commentaire;
+
+    public function controle_technique()
+    {
+      return $this->hasOne(Vehicule::class);
+    }
 
     public function getConforme(string $conforme)
     {

@@ -17,7 +17,7 @@ class CreateEmployesTable extends Migration
             $table->id('id_employe');
             $table->timestamps();
             $table->string('poste');
-            $table->foreignId('id_personne');//->references('id_personne')->on('personnes');;
+            $table->foreignId('id_personne')->nullable();//->references('id_personne')->on('personnes');;
         });
     }
 

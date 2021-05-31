@@ -9,6 +9,7 @@ class PersonneMorale extends Model
 {    
     use HasFactory;
 
+    protected $table = 'personnes_morale';
     protected $primaryKey = 'id_personne_morale';
 
     public function coordonnee() {
