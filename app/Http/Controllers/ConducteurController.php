@@ -24,7 +24,13 @@ class ConducteurController extends Controller
      */
     public function create()
     {
-        //
+        return view(
+          'components/forms/form-conducteur',
+          [
+            'redirect' => 'ajouterConducteur',
+            'conducteur' => null,
+          ]
+        );
     }
 
     /**
@@ -35,7 +41,15 @@ class ConducteurController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+          'est_particulier' => 'required|min:1'
+        ]);
+
+        $conducteur = new Conducteur;
+        $conducteur->est_particulier = ($request->est_particulier === 'on') ? 1 : 0;
+        $conducteur->save();
+        return redirect()->route('conducteurs');
+
     }
 
     /**
@@ -56,9 +70,15 @@ class ConducteurController extends Controller
      * @param  \App\Models\Conducteur  $conducteur
      * @return \Illuminate\Http\Response
      */
-    public function edit(Conducteur $conducteur)
+    public function edit($id)
     {
-        //
+        return view(
+          'components/forms/form-conducteur',
+          [
+            'redirect' => 'modifierConducteur',
+            'conducteur' => Conducteur::find($id)
+          ]
+        );
     }
 
     /**
@@ -68,9 +88,16 @@ class ConducteurController extends Controller
      * @param  \App\Models\Conducteur  $conducteur
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Conducteur $conducteur)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+          'est_particuler' => 'required|min:1'
+        ]);
+
+        $conducteur = Conducteur::find($id);
+        $conducteur->est_particulier = ($request->est_particulier === 'on') ? 1 : 0;
+        $conducteur->save();
+        return redirect()->route('conducteurs');
     }
 
     /**
@@ -79,8 +106,10 @@ class ConducteurController extends Controller
      * @param  \App\Models\Conducteur  $conducteur
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Conducteur $conducteur)
+    public function destroy($id)
     {
-        //
+        Conducteur::find($id)->delete();
+
+        return redirect()->route('conducteurs');
     }
 }

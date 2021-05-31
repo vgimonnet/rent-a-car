@@ -95,7 +95,7 @@ class ControleTechniqueController extends Controller
      * @param  \App\Models\ControleTechnique  $controleTechnique
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ControleTechnique $controleTechnique)
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
           'conforme' => 'required|integer',
@@ -105,7 +105,7 @@ class ControleTechniqueController extends Controller
           'commentaire' => 'required|min:1',
         ]);
 
-        $controle = new ControleTechnique;
+        $controle = ControleTechnique::find($id);
         $controle->conforme = $request->conforme;
         $controle->dateControle = $request->dateControle;
         $controle->contreVisite = $request->contreVisite;

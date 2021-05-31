@@ -9,8 +9,8 @@ abstract class Personne extends Model
 {
     use HasFactory;
 
-    private $table = 'personnes';
-    private $primaryKey = 'id_personne';
+    protected $table = 'personnes';
+    protected $primaryKey = 'id_personne';
     private $prenom;
     private $permis;
 
