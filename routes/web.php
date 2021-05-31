@@ -31,7 +31,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/client', function () {
-    return view('client', ['personnesMorale' => PersonneMorale::all(), 'personnesPhysiques' => Conducteur::where('estParticulier', true)]);
+    return view('client', ['personnesMorale' => PersonneMorale::all(), 'personnesPhysiques' => Conducteur::where('est_particulier', true)]);
 })->middleware(['auth'])->name('client');
 
 Route::get('/ajouter/client/personne_morale', [PersonneMoraleController::class, 'create'])->middleware(['auth'])->name('AjouterPersonneMorale');
@@ -59,8 +59,10 @@ Route::get('/vehicules/delete/{id}', [VehiculeController::class, 'destroy'])->mi
 Route::get('/vehicules/{id}', [VehiculeController::class, 'show'])->name('vehicule');
 
 Route::get('/conducteurs', [ConducteurController::class, 'index']);
-
 Route::get('/conducteurs/{id}', [ConducteurController::class, 'show']);
+
+Route::get('/ajouter/client/{type}', [ConducteurController::class, 'create'])->middleware(['auth'])->name('AjouterPersonnePhysique');
+Route::post('/ajouter/client/{type}', [ConducteurController::class, 'store'])->middleware(['auth'])->name('AjouterPersonnePhysique');
 
 Route::get('/controles-technique', [ControleTechniqueController::class, 'index'])->name('controlesTechnique');
 Route::get('/controles-technique/new', [ControleTechniqueController::class, 'create'])->middleware(['auth'])->name('ajouterControleTechnique');

@@ -13,10 +13,10 @@
                         <x-nav-link :href="route('AjouterPersonneMorale')">
                             {{ __('Ajouter personne morale') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('AjouterPersonneMorale')">
+                        <x-nav-link :href="route('AjouterPersonnePhysique', ['type' => 'personne_physique'])">
                             {{ __('Ajouter personne physique') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('AjouterPersonneMorale')">
+                        <x-nav-link :href="route('AjouterPersonnePhysique', ['type' => 'conducteur'])">
                             {{ __('Ajouter conducteur') }}
                         </x-nav-link>
                     </nav>
@@ -27,6 +27,7 @@
                                 @foreach ($personnesMorale as $personne)
                                     <li class="flex">
                                         {{ $personne->societe }}
+                                        {{ '('.$personne->conducteurs()->count(). 'conducteurs)' }}
                                         <div class="ml-auto">
                                             <a href="{{ route('ModifierPersonneMorale', $personne->id_personne_morale) }}">Modifier</a>
                                             <a href="{{ route('SupprimerPersonneMorale', $personne->id_personne_morale) }}">Supprimer</a>
@@ -39,6 +40,9 @@
                         <section>
                             <h3 class="mt-10 mb-5">Personnes physiques :</h3>
                             <ul>
+                            @php
+                                dd($personnesPhysiques);
+                            @endphp
                                 @foreach ($personnesPhysiques as $personne)
                                     <li class="flex">
                                         {{ $personne->nom }}
