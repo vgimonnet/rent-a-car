@@ -9,6 +9,8 @@ class ControleEtat extends Model
 {
     use HasFactory;
 
+    protected $table = 'controles_etat';
+    protected $primaryKey = 'id_controle_etat';
     private $date;
     private $kilometrage;
     private $etatExterieur;

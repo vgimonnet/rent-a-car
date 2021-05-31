@@ -9,6 +9,8 @@ class Contrat extends Model
 {
     use HasFactory;
 
+    protected $table = 'contrats';
+    protected $primaryKey = 'id_contrat';
     private $created_at;
     private $updated_at;
 

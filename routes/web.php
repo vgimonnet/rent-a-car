@@ -58,9 +58,13 @@ Route::post('/vehicules/edit/{id}', [VehiculeController::class, 'update'])->midd
 Route::get('/vehicules/delete/{id}', [VehiculeController::class, 'destroy'])->middleware(['auth'])->name('supprimerVehicule');
 Route::get('/vehicules/{id}', [VehiculeController::class, 'show'])->name('vehicule');
 
-Route::get('/conducteurs', [ConducteurController::class, 'index']);
-
-Route::get('/conducteurs/{id}', [ConducteurController::class, 'show']);
+Route::get('/conducteurs', [ConducteurController::class, 'index'])->name('conducteurs');
+Route::get('/conducteurs/new', [ConducteurController::class, 'create'])->middleware(['auth'])->name('ajouterConducteur');
+Route::post('/conducteurs/new', [ConducteurController::class, 'store'])->middleware(['auth'])->name('ajouterConducteur');
+Route::get('/conducteurs/edit/{id}', [ConducteurController::class, 'edit'])->middleware(['auth'])->name('modifierConducteur');
+Route::post('/conducteurs/edit/{id}', [ConducteurController::class, 'update'])->middleware(['auth'])->name('modifierConducteur');
+Route::get('/conducteurs/delete/{id}', [ConducteurController::class, 'destroy'])->middleware(['auth'])->name('supprimerConducteur');
+Route::get('/conducteurs/{id}', [ConducteurController::class, 'show'])->name('conducteur');
 
 Route::get('/controles-technique', [ControleTechniqueController::class, 'index'])->name('controlesTechnique');
 Route::get('/controles-technique/new', [ControleTechniqueController::class, 'create'])->middleware(['auth'])->name('ajouterControleTechnique');

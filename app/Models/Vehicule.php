@@ -9,6 +9,7 @@ class Vehicule extends Model
 {
     use HasFactory;
 
+    protected $table = 'vehicules';
     protected $primaryKey = 'immatriculation';
     private $disponible;
     private $poids;
