@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ControleTechnique;
+use App\Models\Vehicule;
 use Illuminate\Http\Request;
 
 class ControleTechniqueController extends Controller
@@ -24,11 +25,18 @@ class ControleTechniqueController extends Controller
      */
     public function create()
     {
+        $vehicules = [];
+
+        foreach (Vehicule::all() as $vehicule) {
+          $vehicules[$vehicule->immatriculation] = $vehicule->immatriculation;
+        }
+
         return view(
           'components/forms/form-controle-technique',
           [
             'redirect' => 'ajouterControleTechnique',
             'controleTechnique' => null,
+            'vehicules' => $vehicules
           ]
         );
     }
@@ -47,6 +55,7 @@ class ControleTechniqueController extends Controller
           'contreVisite' => 'accepted',
           'dateContreVisite' => 'required|min:1',
           'commentaire' => 'required|min:1',
+          'immatriculation' => 'required|min:1'
         ]);
 
         $controle = new ControleTechnique;
@@ -55,7 +64,12 @@ class ControleTechniqueController extends Controller
         $controle->contre_visite = ($request->contreVisite === 'on') ? 1 : 0;
         $controle->date_contre_visite = $request->dateContreVisite;
         $controle->commentaire = $request->commentaire;
+        $controle->immatriculation = $request->immatriculation;
         $controle->save();
+
+        $vehicule = Vehicule::find($controle->immatriculation);
+        $vehicule->id_controle_technique = $controle->id_controle_technique;
+        $vehicule->save();
         return redirect()->route('controlesTechnique');
     }
 
@@ -79,11 +93,18 @@ class ControleTechniqueController extends Controller
      */
     public function edit($id)
     {
+        $vehicules = [];
+
+        foreach (Vehicule::all() as $vehicule) {
+          $vehicules[$vehicule->immatriculation] = $vehicule->immatriculation;
+        }
+
         return view(
           'components/forms/form-controle-technique',
           [
             'redirect' => 'modifierControleTechnique',
-            'controleTechnique' => ControleTechnique::find($id)
+            'controleTechnique' => ControleTechnique::find($id),
+            'vehicules' => $vehicules
           ]
         );
     }
@@ -112,6 +133,10 @@ class ControleTechniqueController extends Controller
         $controle->dateContreVisite = $request->dateContreVisite;
         $controle->commentaire = $request->commentaire;
         $controle->save();
+
+        $vehicule = Vehicule::find($controle->immatriculation);
+        $vehicule->id_controle_technique = $controle->id_controle_technique;
+        $vehicule->save();
         return redirect()->route('controlesTechnique');
     }
 

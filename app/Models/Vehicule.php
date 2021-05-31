@@ -27,6 +27,11 @@ class Vehicule extends Model
         return $this->belongsTo('Contrat');
     }
 
+    public function controle_technique()
+    {
+        return $this->belongsTo(ControleTechnique::class);
+    }
+
     public function getDisponible(string $disponible)
     {
         return $this->disponible;

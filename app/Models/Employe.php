@@ -16,4 +16,9 @@ class Employe extends Personne
     {
         return $this->belongsTo('Contrat');
     }
+
+    public function controle_etat()
+    {
+        return $this->belongsTo(ControleEtat::class);
+    }
 }

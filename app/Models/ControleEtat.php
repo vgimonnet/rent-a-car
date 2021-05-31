@@ -17,6 +17,11 @@ class ControleEtat extends Model
     private $etatInterieur;
     private $fraisAPrevoir;
 
+    public function employe()
+    {
+      return $this->hasOne(Employe::class);
+    }
+
     public function getDate(string $date)
     {
         return $this->date;

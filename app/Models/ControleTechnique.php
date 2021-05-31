@@ -17,6 +17,11 @@ class ControleTechnique extends Model
     private $dateContreVisite;
     private $commentaire;
 
+    public function controle_technique()
+    {
+      return $this->hasOne(Vehicule::class);
+    }
+
     public function getConforme(string $conforme)
     {
         return $this->conforme;

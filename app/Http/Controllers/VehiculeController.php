@@ -94,7 +94,7 @@ class VehiculeController extends Controller
           'components/forms/form-vehicule',
           [
             'redirect' => 'modifierVehicule',
-            'vehicule' => Vehicule::find($id)
+            'vehicule' => Vehicule::find($id),
           ]
         );
     }

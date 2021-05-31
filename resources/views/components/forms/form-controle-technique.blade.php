@@ -23,7 +23,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     @php
                         if ($redirect == 'modifierControleTechnique') {
-                            $redirect = array($redirect, $controleTechnique->id);
+                            $redirect = array($redirect, $controleTechnique->id_controle_technique);
                         }
                         if (!isset($controleTechnique)) {
                             $controleTechnique = null;
@@ -31,6 +31,7 @@
                     @endphp
                     {!! Form::open(['route' => $redirect]) !!}
                         <div class="grid grid-cols-1 md:grid-cols-2">
+                            {{ Form::select('immatriculation', $vehicules) }}
                             {{ Form::checkbox('conforme', $controleTechnique ? $controleTechnique->conforme : null, ['placeholder' => 'Conforme']) }}
                             {{ Form::date('dateControle', $controleTechnique ? $controleTechnique->dateControle : null, ['placeholder' => 'Date controle technique']) }}
                             {{ Form::checkbox('contreVisite', $controleTechnique ? $controleTechnique->contreVisite : null, ['placeholder' => 'Contre visite']) }}

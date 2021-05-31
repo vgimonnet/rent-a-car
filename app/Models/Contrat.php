@@ -16,17 +16,17 @@ class Contrat extends Model
 
     public function vehicule()
     {
-      return $this->hasOne('Vehicule');
+      return $this->hasOne(Vehicule::class, 'id_vehicule');
     }
 
     public function conducteur()
     {
-      return $this->hasOne('Conducteur');
+      return $this->hasOne(Conducteur::class, 'id_conducteur');
     }
 
     public function employe()
     {
-      return $this->hasOne('Employe');
+      return $this->hasOne(Employe::class, 'id_conducteur');
     }
 
     public function getVehiculeId(string $vehicule_id)
