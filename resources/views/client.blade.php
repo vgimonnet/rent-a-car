@@ -13,20 +13,21 @@
                         <x-nav-link :href="route('AjouterPersonneMorale')">
                             {{ __('Ajouter personne morale') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('AjouterPersonneMorale')">
+                        <x-nav-link :href="route('AjouterPersonnePhysique', ['type' => 'personne_physique'])">
                             {{ __('Ajouter personne physique') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('AjouterPersonneMorale')">
+                        <x-nav-link :href="route('AjouterPersonnePhysique', ['type' => 'conducteur'])">
                             {{ __('Ajouter conducteur') }}
                         </x-nav-link>
                     </nav>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 md:grid-cols-3 gap-10">                    
                         <section>
                             <h3 class="mt-10 mb-5">Personnes morale :</h3>
                             <ul>
                                 @foreach ($personnesMorale as $personne)
                                     <li class="flex">
                                         {{ $personne->societe }}
+                                        {{ '('.$personne->conducteurs()->count(). ' conducteurs)' }}
                                         <div class="ml-auto">
                                             <a href="{{ route('ModifierPersonneMorale', $personne->id_personne_morale) }}">Modifier</a>
                                             <a href="{{ route('SupprimerPersonneMorale', $personne->id_personne_morale) }}">Supprimer</a>
@@ -43,8 +44,24 @@
                                     <li class="flex">
                                         {{ $personne->nom }}
                                         <div class="ml-auto">
-                                            <button>Modifier</button>
-                                            <button>Supprimer</button>
+                                            <a href="{{ route('ModifierPersonnePhysique', ['id' => $personne->id_personne, 'type' => 'personne_physique']) }}">Modifier</a>
+                                            <a href="{{ route('SupprimerPersonnePhysique', ['id' => $personne->id_personne, 'type' => 'personne_physique']) }}">Supprimer</a>
+                                            <!-- TODO : ajouter garde fou, modal de confirmation ? -->
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </section>
+                        <section>
+                            <h3 class="mt-10 mb-5">Conducteurs :</h3>
+                            <ul>
+                                @foreach ($conducteurs as $personne)
+                                    <li class="flex">
+                                        {{ $personne->nom }}
+                                        {{ '(société : '.$personne->personneMorale->societe.')' }}
+                                        <div class="ml-auto">
+                                            <a href="{{ route('ModifierPersonnePhysique', ['id' => $personne->id_personne, 'type' => 'conducteur']) }}">Modifier</a>
+                                            <a href="{{ route('SupprimerPersonnePhysique', ['id' => $personne->id_personne, 'type' => 'conducteur']) }}">Supprimer</a>
                                             <!-- TODO : ajouter garde fou, modal de confirmation ? -->
                                         </div>
                                     </li>

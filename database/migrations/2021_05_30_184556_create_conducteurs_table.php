@@ -14,9 +14,8 @@ class CreateConducteursTable extends Migration
     public function up()
     {
         Schema::create('conducteurs', function (Blueprint $table) {
-            $table->id('id_conducteur');
-            $table->boolean('est_particulier');
-            $table->foreignId('id_personne')->nullable();
+            $table->id('id_personne');
+            $table->boolean('est_particulier')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateConducteursTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('contrats');
     }
 }
