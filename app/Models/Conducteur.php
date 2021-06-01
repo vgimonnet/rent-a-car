@@ -22,6 +22,6 @@ class Conducteur extends Personne
     
     public function contrat()
     {
-        return $this->belongsTo(Contrat::class, 'id_contrat');
+        return $this->hasOne(Contrat::class, 'id_contrat');
     }
 }

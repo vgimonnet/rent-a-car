@@ -10,15 +10,19 @@ class Employe extends Personne
     use HasFactory;
 
     protected $table = 'employes';
-    protected $primaryKey = 'id_employe';
+    protected $primaryKey = 'id_personne';
     
-    public function contrat()
+    public function contrats()
     {
-        return $this->belongsTo('Contrat');
+        return $this->hasMany(Contrat::class, 'id_contrat');
+    }
+
+    public function coordonnee() {
+        return $this->hasOne(Coordonnee::class, 'id_coordonnee');
     }
 
     public function controle_etat()
     {
-        return $this->belongsTo(ControleEtat::class);
+        return $this->hasMany(ControleEtat::class, 'id_controle_etat');
     }
 }

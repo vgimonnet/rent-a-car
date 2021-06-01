@@ -14,10 +14,9 @@ class CreateEmployesTable extends Migration
     public function up()
     {
         Schema::create('employes', function (Blueprint $table) {
-            $table->id('id_employe');
-            $table->timestamps();
+            $table->id('id_personne');
             $table->string('poste');
-            $table->foreignId('id_personne')->nullable();//->references('id_personne')->on('personnes');;
+            $table->timestamps();
         });
     }
 

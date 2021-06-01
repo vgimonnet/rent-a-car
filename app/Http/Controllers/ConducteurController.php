@@ -104,6 +104,7 @@ class ConducteurController extends Controller
         return redirect()->route('conducteurs');*/
         $conducteur = new Conducteur();
         $conducteur->prenom = $request->prenom;
+        $conducteur->nom = $request->nom;
         $conducteur->permis = $request->permis;
         if ($type == 'personne_physique') {
             $conducteur->est_particulier = true;

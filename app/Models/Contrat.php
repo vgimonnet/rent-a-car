@@ -21,12 +21,12 @@ class Contrat extends Model
 
     public function conducteur()
     {
-      return $this->hasOne(Conducteur::class, 'id_conducteur');
+      return $this->belongsTo(Conducteur::class, 'id_personne');
     }
 
     public function employe()
     {
-      return $this->hasOne(Employe::class, 'id_conducteur');
+      return $this->belongsTo(Employe::class, 'id_personne');
     }
 
     public function getVehiculeId(string $vehicule_id)

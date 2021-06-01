@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Ajout d'employé
+            {{ $title }}
         </h2>
     </x-slot>
 
@@ -23,7 +23,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     @php
                         if ($redirect == 'modifierEmploye') {
-                            $redirect = array($redirect, $employe->id);
+                            $redirect = array($redirect, $employe->id_personne);
                         }
                         if (!isset($employe)) {
                             $employe = null;
@@ -31,11 +31,56 @@
                     @endphp
                     {!! Form::open(['route' => $redirect]) !!}
                         <div class="grid grid-cols-1 md:grid-cols-2">
-                            {{ Form::select('id_personne', $personnes) }}
-                            {{ Form::text('poste', $employe ? $employe->poste : null, ['placeholder' => 'Poste']) }}
+                            <div class="col-12 col-md-4">
+                                {{ Form::label('nom', 'Nom') }}
+                                {{ Form::text('nom', $employe ? $employe->nom : null, ['placeholder' => 'Nom']) }}
+                            </div>
+                            <div class="col-12 col-md-4">
+                                {{ Form::label('prenom', 'Prénom') }}
+                                {{ Form::text('prenom', $employe ? $employe->prenom : null, ['placeholder' => 'Prénom']) }}
+                            </div>
+                            <div class="col-12 col-md-4">
+                                {{ Form::label('permis', 'Permis') }}
+                                {{ Form::text('permis', $employe ? $employe->permis : null, ['placeholder' => 'N° permis']) }}
+                            </div>
+                            <div class="col-12 col-md-6">
+                                {{ Form::label('poste', 'Poste') }}
+                                {{ Form::text('poste', $employe ? $employe->poste : null, ['placeholder' => 'Poste']) }}
+                            </div>
+                        </div>
+                        <h3 class="mt-10 mb-4">Coordonnées :</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div class="col-12 col-md-6">
+                                {{ Form::label('email', 'Email') }}
+                                {{ Form::text('email', $employe && $employe->coordonnee ? $employe->coordonnee->email : null, ['placeholder' => 'Email']) }}
+                            </div>
+                            <div class="col-12 col-md-6">
+                                {{ Form::label('telephone', 'Téléphone') }}
+                                {{ Form::text('telephone', $employe && $employe->coordonnee ? $employe->coordonnee->telephone : null, ['placeholder' => 'Téléphone']) }}
+                            </div>
+                            <div class="col-12 col-md-6">
+                                {{ Form::label('pays', 'Pays') }}
+                                {{ Form::text('pays', $employe && $employe->coordonnee ? $employe->coordonnee->pays : null, ['placeholder' => 'Pays']) }}
+                            </div>
+                            <div class="col-12 col-md-6">
+                                {{ Form::label('ville', 'Ville') }}
+                                {{ Form::text('ville', $employe && $employe->coordonnee ? $employe->coordonnee->ville : null, ['placeholder' => 'Ville']) }}
+                            </div>
+                            <div class="col-12 col-md-6">
+                                {{ Form::label('adresse', 'Adresse') }}
+                                {{ Form::text('adresse', $employe && $employe->coordonnee ? $employe->coordonnee->adresse : null, ['placeholder' => 'Adresse']) }}
+                            </div>
+                            <div class="col-12 col-md-6">
+                                {{ Form::label('complement', 'Complément d\'adresse') }}
+                                {{ Form::text('complement', $employe && $employe->coordonnee ? $employe->coordonnee->complement : null, ['placeholder' => 'Étage, porte, ...']) }}
+                            </div>
+                            <div class="col-12 col-md-6">
+                                {{ Form::label('codePostal', 'Code postal') }}
+                                {{ Form::number('codePostal', $employe && $employe->coordonnee ? $employe->coordonnee->codePostal : null) }}
+                            </div>
                         </div>
                         <div class="text-center w-full">
-                            {{ Form::submit($employe ? 'Modifier' : 'Ajouter') }}
+                            {{ Form::submit($btn) }}
                         </div>
                     {!! Form::close() !!}
                 </div>
