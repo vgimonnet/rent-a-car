@@ -25,7 +25,11 @@
                         if (!isset($personne)) {
                             $personne = null;
                         }
-                        $redirect = array($redirect, $type);
+                        if ($redirect == 'ModifierPersonnePhysique') {
+                            $redirect = array($redirect, ['id' => $personne->id_personne, 'type' => $type]);
+                        } else {
+                            $redirect = array($redirect, $type);
+                        }
                     @endphp
                     {!! Form::open(['route' => $redirect]) !!}
                         <div class="grid grid-cols-1 md:grid-cols-2">

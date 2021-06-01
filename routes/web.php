@@ -31,16 +31,24 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/client', function () {
-    return view('client', ['personnesMorale' => PersonneMorale::all(), 'personnesPhysiques' => Conducteur::where('est_particulier', true)]);
+    return view('client', [
+        'personnesMorale' => PersonneMorale::all(), 
+        'personnesPhysiques' => Conducteur::all()->where('est_particulier', '=', true),
+        'conducteurs' => Conducteur::all()->where('est_particulier', '=', false)
+    ]);
 })->middleware(['auth'])->name('client');
 
 Route::get('/ajouter/client/personne_morale', [PersonneMoraleController::class, 'create'])->middleware(['auth'])->name('AjouterPersonneMorale');
 Route::post('/ajouter/client/personne_morale', [PersonneMoraleController::class, 'store'])->middleware(['auth'])->name('AjouterPersonneMorale');
-
 Route::get('/modifier/client/personne_morale/{id}', [PersonneMoraleController::class, 'edit'])->middleware(['auth'])->name('ModifierPersonneMorale');
 Route::post('/modifier/client/personne_morale/{id}', [PersonneMoraleController::class, 'update'])->middleware(['auth'])->name('ModifierPersonneMorale');
-
 Route::get('/supprimer/client/personne_morale/{id}', [PersonneMoraleController::class, 'destroy'])->middleware(['auth'])->name('SupprimerPersonneMorale');
+
+Route::get('/ajouter/client/{type}', [ConducteurController::class, 'create'])->middleware(['auth'])->name('AjouterPersonnePhysique');
+Route::post('/ajouter/client/{type}', [ConducteurController::class, 'store'])->middleware(['auth'])->name('AjouterPersonnePhysique');
+Route::get('/modifier/client/{id}/{type}', [ConducteurController::class, 'edit'])->middleware(['auth'])->name('ModifierPersonnePhysique');
+Route::post('/modifier/client/{id}/{type}', [ConducteurController::class, 'update'])->middleware(['auth'])->name('ModifierPersonnePhysique');
+Route::get('/supprimer/client/{id}/{type}', [ConducteurController::class, 'destroy'])->middleware(['auth'])->name('SupprimerPersonnePhysique');
 
 Route::get('/contrats', [ContratController::class, 'index'])->name('contrats');
 Route::get('/contrats/new', [ContratController::class, 'create'])->middleware(['auth'])->name('ajouterContrat');
@@ -65,9 +73,6 @@ Route::get('/conducteurs/edit/{id}', [ConducteurController::class, 'edit'])->mid
 Route::post('/conducteurs/edit/{id}', [ConducteurController::class, 'update'])->middleware(['auth'])->name('modifierConducteur');
 Route::get('/conducteurs/delete/{id}', [ConducteurController::class, 'destroy'])->middleware(['auth'])->name('supprimerConducteur');
 Route::get('/conducteurs/{id}', [ConducteurController::class, 'show'])->name('conducteur');
-
-Route::get('/ajouter/client/{type}', [ConducteurController::class, 'create'])->middleware(['auth'])->name('AjouterPersonnePhysique');
-Route::post('/ajouter/client/{type}', [ConducteurController::class, 'store'])->middleware(['auth'])->name('AjouterPersonnePhysique');
 
 Route::get('/controles-technique', [ControleTechniqueController::class, 'index'])->name('controlesTechnique');
 Route::get('/controles-technique/new', [ControleTechniqueController::class, 'create'])->middleware(['auth'])->name('ajouterControleTechnique');
