@@ -31,11 +31,17 @@
                     @endphp
                     {!! Form::open(['route' => $redirect]) !!}
                         <div class="grid grid-cols-1 md:grid-cols-2">
+                            {{ Form::label('immatriculation', 'Vehicule') }}
                             {{ Form::select('immatriculation', $vehicules) }}
+                            {{ Form::label('conforme', 'Est conforme') }}
                             {{ Form::checkbox('conforme', $controleTechnique ? $controleTechnique->conforme : null, ['placeholder' => 'Conforme']) }}
-                            {{ Form::date('dateControle', $controleTechnique ? $controleTechnique->dateControle : null, ['placeholder' => 'Date controle technique']) }}
-                            {{ Form::checkbox('contreVisite', $controleTechnique ? $controleTechnique->contreVisite : null, ['placeholder' => 'Contre visite']) }}
-                            {{ Form::date('dateContreVisite', $controleTechnique ? $controleTechnique->dateContreVisite : null, ['placeholder' => 'Date contre visite']) }}
+                            {{ Form::label('dateControle', 'Date contrôle') }}
+                            {{ Form::date('dateControle', $controleTechnique ? $controleTechnique->date_controle : null, ['placeholder' => 'Date controle technique']) }}
+                            {{ Form::label('contreVisite', 'Nécessite une contrevisite') }}
+                            {{ Form::checkbox('contreVisite', $controleTechnique ? $controleTechnique->contre_visite : null, ['placeholder' => 'Contre visite']) }}
+                            {{ Form::label('dateContreVisite', 'Date de la contrevisite') }}
+                            {{ Form::date('dateContreVisite', $controleTechnique ? $controleTechnique->date_contre_visite : null, ['placeholder' => 'Date contre visite']) }}
+                            {{ Form::label('commentaire', 'Commentaire') }}
                             {{ Form::textarea('commentaire', $controleTechnique ? $controleTechnique->commentaire : null, ['placeholder' => 'Commentaire']) }}
                         </div>
                         <div class="text-center w-full">

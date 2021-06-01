@@ -11,69 +11,21 @@ class ControleTechnique extends Model
 
     protected $table = 'controles_technique';
     protected $primaryKey = 'id_controle_technique';
-    private $conforme;
-    private $dateControle;
-    private $contreVisite;
-    private $dateContreVisite;
-    private $commentaire;
 
-    public function controle_technique()
+    public function vehicule()
     {
-      return $this->hasOne(Vehicule::class);
+      return $this->belongsTo(Vehicule::class, 'id_vehicule');
     }
 
-    public function getConforme(string $conforme)
-    {
-        return $this->conforme;
-    }
-    
-    public function setConforme(string $conforme)
-    {
-        $this->conforme = $conforme;
-        return $this;
-    }
+    public function getVehicule() {
+        $vehicule = VehiculeLeger::where('immatriculation', '=', $this->id_vehicule)->get();
+        if (empty($vehicule)) {
+          $vehicule = VehiculeUtilitaire::where('immatriculation', '=', $this->id_vehicule)->get();
+        }
+        if(!empty($vehicule) && sizeof($vehicule) > 0) {
+            return $vehicule[0];
+        }
 
-    public function getDateControle(string $dateControle)
-    {
-        return $this->dateControle;
-    }
-    
-    public function setDateControle(string $dateControle)
-    {
-        $this->dateControle = $dateControle;
-        return $this;
-    }
-
-    public function getContreVisite(string $contreVisite)
-    {
-        return $this->contreVisite;
-    }
-    
-    public function setContreVisite(string $contreVisite)
-    {
-        $this->contreVisite = $contreVisite;
-        return $this;
-    }
-
-    public function getDateContreVisite(string $dateContreVisite)
-    {
-        return $this->dateContreVisite;
-    }
-    
-    public function setDateContreVisite(string $dateContreVisite)
-    {
-        $this->dateContreVisite = $dateContreVisite;
-        return $this;
-    }
-
-    public function getCommentaire(string $commentaire)
-    {
-        return $this->commentaire;
-    }
-    
-    public function setCommentaire(string $commentaire)
-    {
-        $this->commentaire = $commentaire;
-        return $this;
+        return null;
     }
 }

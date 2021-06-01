@@ -30,14 +30,8 @@
                     <x-nav-link :href="route('controlesEtat')" :active="request()->routeIs('controlesEtat')">
                         {{ __('Controles Etat') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('personnes')" :active="request()->routeIs('personnes')">
-                        {{ __('Personnes') }}
-                    </x-nav-link>
                     <x-nav-link :href="route('employes')" :active="request()->routeIs('employes')">
                         {{ __('Employés') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('conducteurs')" :active="request()->routeIs('conducteurs')">
-                        {{ __('Conducteurs') }}
                     </x-nav-link>
                 </div>
             </div>

@@ -15,13 +15,13 @@ class CreateControleTechniquesTable extends Migration
     {
         Schema::create('controles_technique', function (Blueprint $table) {
             $table->id('id_controle_technique');
-            $table->foreignId('immatriculation')->nullable();//->references('immatriculation')->on('vehicules');
-            $table->timestamps();
-            $table->boolean('conforme');
+            $table->foreignId('id_vehicule');//->references('immatriculation')->on('vehicules');
+            $table->boolean('conforme')->nullable();
             $table->date('date_controle');
-            $table->boolean('contre_visite');
-            $table->date('date_contre_visite');
+            $table->boolean('contre_visite')->nullable();
+            $table->date('date_contre_visite')->nullable();
             $table->string('commentaire');
+            $table->timestamps();
         });
     }
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ControleTechnique;
 use App\Models\Vehicule;
+use App\Models\VehiculeLeger;
+use App\Models\VehiculeUtilitaire;
 use Illuminate\Http\Request;
 
 class ControleTechniqueController extends Controller
@@ -27,8 +29,8 @@ class ControleTechniqueController extends Controller
     {
         $vehicules = [];
 
-        foreach (Vehicule::all() as $vehicule) {
-          $vehicules[$vehicule->immatriculation] = $vehicule->immatriculation;
+        foreach (array_merge(VehiculeLeger::all()->toArray(), VehiculeUtilitaire::all()->toArray()) as $vehicule) {
+          $vehicules[$vehicule['immatriculation']] = $vehicule['marque'].' '.$vehicule['modele'].' imat : '.$vehicule['immatriculation'];
         }
 
         return view(
@@ -50,13 +52,11 @@ class ControleTechniqueController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-          'conforme' => 'accepted',
           'dateControle' => 'required|min:1',
-          'contreVisite' => 'accepted',
-          'dateContreVisite' => 'required|min:1',
           'commentaire' => 'required|min:1',
           'immatriculation' => 'required|min:1'
         ]);
+
 
         $controle = new ControleTechnique;
         $controle->conforme = ($request->conforme === 'on') ? 1 : 0;
@@ -64,12 +64,17 @@ class ControleTechniqueController extends Controller
         $controle->contre_visite = ($request->contreVisite === 'on') ? 1 : 0;
         $controle->date_contre_visite = $request->dateContreVisite;
         $controle->commentaire = $request->commentaire;
-        $controle->immatriculation = $request->immatriculation;
-        $controle->save();
+        $controle->id_vehicule = $request->immatriculation;
 
-        $vehicule = Vehicule::find($controle->immatriculation);
-        $vehicule->id_controle_technique = $controle->id_controle_technique;
-        $vehicule->save();
+        $vehicule = VehiculeLeger::where('immatriculation', '=', $request->immatriculation)->get();
+        if (sizeof($vehicule) < 1) {
+          $vehicule = VehiculeUtilitaire::where('immatriculation', '=', $request->immatriculation)->get();
+        }
+
+        if (sizeof($vehicule) > 0) {
+          $vehicule[0]->controles_technique()->save($controle);
+        }
+
         return redirect()->route('controlesTechnique');
     }
 
@@ -95,8 +100,8 @@ class ControleTechniqueController extends Controller
     {
         $vehicules = [];
 
-        foreach (Vehicule::all() as $vehicule) {
-          $vehicules[$vehicule->immatriculation] = $vehicule->immatriculation;
+        foreach (array_merge(VehiculeLeger::all()->toArray(), VehiculeUtilitaire::all()->toArray()) as $vehicule) {
+          $vehicules[$vehicule['immatriculation']] = $vehicule['marque'].' '.$vehicule['modele'].' imat : '.$vehicule['immatriculation'];
         }
 
         return view(
@@ -118,26 +123,31 @@ class ControleTechniqueController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-          'conforme' => 'required|integer',
-          'date_controle' => 'required|min:1',
-          'contre_visite' => 'required|integer',
-          'date_contre_visite' => 'required|min:1',
-          'commentaire' => 'required|min:1',
-        ]);
+      $validated = $request->validate([
+        'dateControle' => 'required|min:1',
+        'commentaire' => 'required|min:1',
+        'immatriculation' => 'required|min:1'
+      ]);
 
-        $controle = ControleTechnique::find($id);
-        $controle->conforme = $request->conforme;
-        $controle->dateControle = $request->dateControle;
-        $controle->contreVisite = $request->contreVisite;
-        $controle->dateContreVisite = $request->dateContreVisite;
-        $controle->commentaire = $request->commentaire;
-        $controle->save();
 
-        $vehicule = Vehicule::find($controle->immatriculation);
-        $vehicule->id_controle_technique = $controle->id_controle_technique;
-        $vehicule->save();
-        return redirect()->route('controlesTechnique');
+      $controle = ControleTechnique::find($id);
+      $controle->conforme = ($request->conforme === 'on') ? 1 : 0;
+      $controle->date_controle = $request->dateControle;
+      $controle->contre_visite = ($request->contreVisite === 'on') ? 1 : 0;
+      $controle->date_contre_visite = $request->dateContreVisite;
+      $controle->commentaire = $request->commentaire;
+      $controle->id_vehicule = $request->immatriculation;
+
+      $vehicule = VehiculeLeger::where('immatriculation', '=', $request->immatriculation)->get();
+      if (sizeof($vehicule) < 1) {
+        $vehicule = VehiculeUtilitaire::where('immatriculation', '=', $request->immatriculation)->get();
+      }
+
+      if (sizeof($vehicule) > 0) {
+        $vehicule[0]->controles_technique()->save($controle);
+      }
+
+      return redirect()->route('controlesTechnique');
     }
 
     /**

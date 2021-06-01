@@ -16,7 +16,7 @@ class Contrat extends Model
 
     public function vehicule()
     {
-      return $this->hasOne(Vehicule::class, 'id_vehicule');
+      return $this->belongsTo(Vehicule::class, 'id_vehicule');
     }
 
     public function conducteur()

@@ -22,8 +22,10 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     @php
-                        if ($redirect == 'modifierVehicule') {
-                            $redirect = array($redirect, $vehicule->immatriculation);
+                        if ($redirect == 'ModifierVehicule') {
+                            $redirect = array($redirect, ['id' => $vehicule->id_vehicule, 'type' => $type]);
+                        } else {
+                            $redirect = array($redirect, $type);
                         }
                         if (!isset($vehicule)) {
                             $vehicule = null;
@@ -31,19 +33,35 @@
                     @endphp
                     {!! Form::open(['route' => $redirect]) !!}
                         <div class="grid grid-cols-1 md:grid-cols-2">
+                            {{ Form::label('immatriculation', 'Immatriculation') }}
                             {{ Form::text('immatriculation', $vehicule ? $vehicule->immatriculation : null, ['placeholder' => 'Immatriculation']) }}
+                            {{ Form::label('marque', 'Marque') }}
                             {{ Form::text('marque', $vehicule ? $vehicule->marque : null, ['placeholder' => 'Marque']) }}
+                            {{ Form::label('modele', 'Modèle') }}
                             {{ Form::text('modele', $vehicule ? $vehicule->modele : null, ['placeholder' => 'Modèle']) }}
+                            {{ Form::label('couleur', 'Couleur') }}
                             {{ Form::text('couleur', $vehicule ? $vehicule->couleur : null, ['placeholder' => 'Couleur']) }}
-                            {{ Form::text('poids', $vehicule ? $vehicule->poids : null, ['placeholder' => 'Poids']) }}
-                            {{ Form::text('hauteur', $vehicule ? $vehicule->hauteur : null, ['placeholder' => 'Hauteur']) }}
-                            {{ Form::text('places', $vehicule ? $vehicule->places : null, ['placeholder' => 'Places']) }}
-                            {{ Form::text('coutParJour', $vehicule ? $vehicule->cout_par_jour : null, ['placeholder' => 'Cout par jour']) }}
-                            {{ Form::date('dateAchat', $vehicule ? $vehicule->date_achat : null, ['placeholder' => 'Date Achat']) }}
-                            {{ Form::text('contenanceCoffre', $vehicule ? $vehicule->contenance_coffre : null, ['placeholder' => 'Contenance coffre']) }}
+                            {{ Form::label('poid', 'Poid') }}
+                            {{ Form::number('poid', $vehicule ? $vehicule->poid : null, ['placeholder' => 'Poids']) }}
+                            {{ Form::label('hauteur', 'Hauteur (cm)') }}
+                            {{ Form::number('hauteur', $vehicule ? $vehicule->hauteur : null, ['placeholder' => 'Hauteur']) }}
+                            {{ Form::label('places', 'Places') }}
+                            {{ Form::number('places', $vehicule ? $vehicule->places : null, ['placeholder' => 'Places']) }}
+                            {{ Form::label('coutParJour', 'Coût par jour') }}
+                            {{ Form::number('coutParJour', $vehicule ? $vehicule->cout_par_jour : null, ['placeholder' => 'Coût par jour']) }}
+                            {{ Form::label('dateAnciennete', 'Date ancienneté') }}
+                            {{ Form::date('dateAnciennete', $vehicule ? $vehicule->date_anciennete : null, ['placeholder' => 'Date anciennete']) }}
+                            {{ Form::label('contenanceCoffre', 'Contenance du coffre') }}
+                            {{ Form::text('contenanceCoffre', $vehicule ? $vehicule->contenance_coffre : null, ['placeholder' => 'Contenance du coffre']) }}
+                            @if ($type == 'vehicule_utilitaire')
+                                {{ Form::label('benne', 'Possède une benne') }}
+                                {{ Form::checkbox('benne', null, $vehicule ? $vehicule->benne : false) }}
+                            @endif
+                            {{ Form::label('disponible', 'Est disponible') }}
+                            {{ Form::checkbox('disponible', null, $vehicule ? $vehicule->disponible : false) }}
                         </div>
                         <div class="text-center w-full">
-                            {{ Form::submit($vehicule ? 'Modifier' : 'Ajouter') }}
+                            {{ Form::submit($btn) }}
                         </div>
                     {!! Form::close() !!}
                 </div>
