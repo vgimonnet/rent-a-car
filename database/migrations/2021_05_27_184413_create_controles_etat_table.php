@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateControleEtatsTable extends Migration
+class CreateControlesEtatTable extends Migration
 {
     /**
      * Run the migrations.
@@ -32,6 +32,6 @@ class CreateControleEtatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('controle_etats');
+        Schema::dropIfExists('controles_etat');
     }
 }
