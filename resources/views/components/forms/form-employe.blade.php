@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Ajout de véhicule
+            Ajout d'employé
         </h2>
     </x-slot>
 
@@ -31,8 +31,7 @@
                     @endphp
                     {!! Form::open(['route' => $redirect]) !!}
                         <div class="grid grid-cols-1 md:grid-cols-2">
-                            {{ Form::text('prenom', $employe ? $employe->prenom : null, ['placeholder' => 'Prenom']) }}
-                            {{ Form::text('permis', $employe ? $employe->permis : null, ['placeholder' => 'Permis']) }}
+                            {{ Form::select('id_personne', $personnes) }}
                             {{ Form::text('poste', $employe ? $employe->poste : null, ['placeholder' => 'Poste']) }}
                         </div>
                         <div class="text-center w-full">

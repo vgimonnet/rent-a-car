@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Controles Etat') }}
+            {{ __('Personnes') }}
         </h2>
     </x-slot>
 
@@ -10,18 +10,18 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <nav class="text-center">
-                        <x-nav-link :href="route('ajouterControleEtat')">
-                            {{ __('Ajouter un controle d\'état') }}
+                        <x-nav-link :href="route('ajouterPersonne')">
+                            {{ __('Ajouter une personne') }}
                         </x-nav-link>
                     </nav>
-                    <h3 class="mt-10 mb-5">Controles état :</h3>
+                    <h3 class="mt-10 mb-5">Personnes :</h3>
                     <ul class="grid grid-cols-1 gap-10">
-                        @foreach($controlesEtat as $controle)
+                        @foreach($personnes as $personne)
                             <li class="flex">
-                                <a href="{{ route('controleEtat', $controle->id_controle_etat) }}">{{ $controle->id_controle_etat }}</a>
+                                <a href="{{ route('personne', $personne->id_personne) }}">{{ $personne->id_personne }}</a>
                                 <div class="ml-auto">
-                                    <a href="{{ route('modifierControleEtat', $controle->id_controle_etat) }}">Modifier</a>
-                                    <a href="{{ route('supprimerControleEtat', $controle->id_controle_etat) }}">Supprimer</a>
+                                    <a href="{{ route('modifierPersonne', $personne->id_personne) }}">Modifier</a>
+                                    <a href="{{ route('supprimerPersonne', $personne->id_personne) }}">Supprimer</a>
                                     <!-- TODO : ajouter garde fou, modal de confirmation ? -->
                                 </div>
                             </li>

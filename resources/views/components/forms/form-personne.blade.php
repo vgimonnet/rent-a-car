@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Ajout d'un controle d'état
+            Ajout de personne
         </h2>
     </x-slot>
 
@@ -22,24 +22,20 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     @php
-                        if ($redirect == 'modifierControleEtat') {
-                            $redirect = array($redirect, $controle->id);
+                        if ($redirect == 'ModifierPersonne') {
+                            $redirect = array($redirect, $personne->id_personne);
                         }
-                        if (!isset($controle)) {
-                            $controle = null;
+                        if (!isset($personne)) {
+                            $personne = null;
                         }
                     @endphp
                     {!! Form::open(['route' => $redirect]) !!}
                         <div class="grid grid-cols-1 md:grid-cols-2">
-                            {{ Form::select('id_employe', $employes) }}
-                            {{ Form::date('date', $controle ? $controle->date : null, ['placeholder' => 'Date']) }}
-                            {{ Form::text('kilometrage', $controle ? $controle->kilometrage : null, ['placeholder' => 'Kilometrage']) }}
-                            {{ Form::text('etatExterieur', $controle ? $controle->etatExterieur : null, ['placeholder' => 'état extérieur']) }}
-                            {{ Form::text('etatInterieur', $controle ? $controle->etatInterieur : null, ['placeholder' => 'état intérieur']) }}
-                            {{ Form::text('fraisAPrevoir', $controle ? $controle->fraisAPrevoir : null, ['placeholder' => 'frais à prévoir']) }}
+                            {{ Form::text('prenom', $personne ? $personne->permis : null, ['placeholder' => 'Prénom']) }}
+                            {{ Form::text('permis', $personne ? $personne->marque : null, ['placeholder' => 'Permis']) }}
                         </div>
                         <div class="text-center w-full">
-                            {{ Form::submit($controle ? 'Modifier' : 'Ajouter') }}
+                            {{ Form::submit($personne ? 'Modifier' : 'Ajouter') }}
                         </div>
                     {!! Form::close() !!}
                 </div>

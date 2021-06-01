@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employe;
+use App\Models\Personne;
 use Illuminate\Http\Request;
 
 class EmployeController extends Controller
@@ -24,11 +25,18 @@ class EmployeController extends Controller
      */
     public function create()
     {
+        $personnes = [];
+
+        foreach (Personne::all() as $personne) {
+          $personnes[$personne->id_personne] = $personne->prenom;
+        }
+        
         return view(
           'components/forms/form-employe',
           [
             'redirect' => 'ajouterEmploye',
             'employe' => null,
+            'personnes' => $personnes
           ]
         );
     }
@@ -42,15 +50,13 @@ class EmployeController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-          'prenom' => 'required|min:1',
-          'permis' => 'required|min:1',
+          'id_personne' => 'required|min:1',
           'poste' => 'required|min:1',
         ]);
 
         $employe = new Employe;
-        $employe->prenom = $request->prenom;
-        $employe->permis = $request->permis;
-        $employe->poste = $request->permis;
+        $employe->id_personne = $request->id_personne;
+        $employe->poste = $request->poste;
 
         $employe->save();
         return redirect()->route('employes');
@@ -76,11 +82,18 @@ class EmployeController extends Controller
      */
     public function edit($id)
     {
+        $personnes = [];
+
+        foreach (Personne::all() as $personne) {
+          $personnes[$personne->id_personne] = $personne->prenom;
+        }
+
         return view(
           'components/forms/form-employe',
           [
             'redirect' => 'modifierEmploye',
-            'employe' => Employe::find($id)
+            'employe' => Employe::find($id),
+            'personnes' => $personnes
           ]
         );
     }
@@ -95,14 +108,12 @@ class EmployeController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-          'prenom' => 'required|min:1',
-          'permis' => 'required|min:1',
+          'id_personne' => 'required|min:1',
           'poste' => 'required|min:1',
         ]);
 
         $employe = Employe::find($id);
-        $employe->prenom = $request->prenom;
-        $employe->permis = $request->permis;
+        $employe->id_personne = $request->id_personne;
         $employe->poste = $request->permis;
         $employe->save();
 

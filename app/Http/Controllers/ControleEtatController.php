@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ControleEtat;
+use App\Models\Employe;
 use Illuminate\Http\Request;
 
 class ControleEtatController extends Controller
@@ -24,11 +25,18 @@ class ControleEtatController extends Controller
      */
     public function create()
     {
+        $employes = [];
+
+        foreach (Employe::all() as $employe) {
+          $employes[$employe->id_employe] = $employe->id_employe;
+        }
+
         return view(
           'components/forms/form-controle-etat',
           [
             'redirect' => 'ajouterControleEtat',
-            'controle' => null
+            'controle' => null,
+            'employes' => $employes
           ]
         );
     }
@@ -55,6 +63,7 @@ class ControleEtatController extends Controller
         $controle->etat_exterieur = $request->etatExterieur;
         $controle->etat_interieur = $request->etatInterieur;
         $controle->frais_a_prevoir = $request->fraisAPrevoir;
+        $controle->id_employe = $request->id_employe;
         $controle->save();
         return redirect()->route('controlesEtat');
     }
@@ -79,11 +88,18 @@ class ControleEtatController extends Controller
      */
     public function edit($id)
     {
+        $employes = [];
+
+        foreach (Employe::all() as $employe) {
+          $employes[$employe->id_employe] = $employe->id_employe;
+        }
+
         return view(
           'components/forms/form-controle-etat',
           [
             'redirect' => 'modifierControleEtat',
-            'controle' => ControleEtat::find($id)
+            'controle' => ControleEtat::find($id),
+            'employes' => $employes
           ]
         );
     }
@@ -111,6 +127,7 @@ class ControleEtatController extends Controller
         $controle->etatExterieur = $request->etatExterieur;
         $controle->etatInterieur = $request->etatInterieur;
         $controle->fraisAPrevoir = $request->fraisAPrevoir;
+        $controle->id_employe = $request->id_employe;
         $controle->save();
         return redirect()->route('controlesEtat');
     }

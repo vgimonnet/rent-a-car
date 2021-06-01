@@ -10,6 +10,7 @@ use App\Http\Controllers\ConducteurController;
 use App\Http\Controllers\ControleTechniqueController;
 use App\Http\Controllers\ControleEtatController;
 use App\Http\Controllers\EmployeController;
+use App\Http\Controllers\PersonneController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,14 @@ Route::get('/modifier/client/personne_morale/{id}', [PersonneMoraleController::c
 Route::post('/modifier/client/personne_morale/{id}', [PersonneMoraleController::class, 'update'])->middleware(['auth'])->name('ModifierPersonneMorale');
 
 Route::get('/supprimer/client/personne_morale/{id}', [PersonneMoraleController::class, 'destroy'])->middleware(['auth'])->name('SupprimerPersonneMorale');
+
+Route::get('/personnes', [PersonneController::class, 'index'])->name('personnes');
+Route::get('/personnes/new', [PersonneController::class, 'create'])->middleware(['auth'])->name('ajouterPersonne');
+Route::post('/personnes/new', [PersonneController::class, 'store'])->middleware(['auth'])->name('ajouterPersonne');
+Route::get('/personnes/edit/{id}', [PersonneController::class, 'edit'])->middleware(['auth'])->name('modifierPersonne');
+Route::post('/personnes/edit/{id}', [PersonneController::class, 'update'])->middleware(['auth'])->name('modifierPersonne');
+Route::get('/personnes/delete/{id}', [PersonneController::class, 'destroy'])->middleware(['auth'])->name('supprimerPersonne');
+Route::get('/personnes/{id}', [PersonneController::class, 'show'])->name('personne');
 
 Route::get('/contrats', [ContratController::class, 'index'])->name('contrats');
 Route::get('/contrats/new', [ContratController::class, 'create'])->middleware(['auth'])->name('ajouterContrat');
