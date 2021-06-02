@@ -11,8 +11,6 @@ class Contrat extends Model
 
     protected $table = 'contrats';
     protected $primaryKey = 'id_contrat';
-    private $created_at;
-    private $updated_at;
 
     public function vehicule_leger()
     {
@@ -62,38 +60,5 @@ class Contrat extends Model
         }
 
         return $info;
-    }
-
-    public function getVehiculeId(string $vehicule_id)
-    {
-        return $this->vehicule_id;
-    }
-    
-    public function setVehiculeId(string $vehicule_id)
-    {
-        $this->vehicule_id = $vehicule_id;
-        return $this;
-    }
-
-    public function getConducteurId(string $conducteur_id)
-    {
-        return $this->conducteur_id;
-    }
-    
-    public function setConducteurId(string $conducteur_id)
-    {
-        $this->conducteur_id = $conducteur_id;
-        return $this;
-    }
-
-    public function getEmployeId(string $employe_id)
-    {
-        return $this->employe_id;
-    }
-    
-    public function setEmployeId(string $employe_id)
-    {
-        $this->employe_id = $employe_id;
-        return $this;
     }
 }
