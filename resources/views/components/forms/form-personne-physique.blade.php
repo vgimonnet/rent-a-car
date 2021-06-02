@@ -26,7 +26,7 @@
                             $personne = null;
                         }
                         if ($redirect == 'ModifierPersonnePhysique') {
-                            $redirect = array($redirect, ['id' => $personne->id_personne, 'type' => $type]);
+                            $redirect = array($redirect, ['id' => $personne->id_conducteur, 'type' => $type]);
                         } else {
                             $redirect = array($redirect, $type);
                         }

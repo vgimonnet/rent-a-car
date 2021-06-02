@@ -10,7 +10,7 @@ class Conducteur extends Personne
     use HasFactory;
 
     protected $table = 'conducteurs';
-    protected $primaryKey = 'id_personne';
+    protected $primaryKey = 'id_conducteur';
 
     public function personneMorale() {
         return $this->belongsTo(PersonneMorale::class, 'id_personne_morale');
@@ -20,8 +20,8 @@ class Conducteur extends Personne
         return $this->hasOne(Coordonnee::class, 'id_coordonnee');
     }
     
-    public function contrat()
+    public function contrats()
     {
-        return $this->hasOne(Contrat::class, 'id_contrat');
+        return $this->hasMany(Contrat::class, 'id_contrat');
     }
 }

@@ -31,8 +31,8 @@
                     @endphp
                     {!! Form::open(['route' => $redirect]) !!}
                         <div class="grid grid-cols-1 md:grid-cols-2">
-                          {{ Form::select('id_personne', $personnes) }}
-                          {{ Form::select('id_personne_morale', $personnesMorale) }}
+                          {{ Form::select('id_conducteur', $personnes) }}
+                          {{ Form::select('id_conducteur_morale', $personnesMorale) }}
                           {{ Form::checkbox('est_particulier', $conducteur ? $conducteur->est_particulier : null, ['placeholder' => 'Particulier']) }}                        </div>
                         <div class="text-center w-full">
                             {{ Form::submit($conducteur ? 'Modifier' : 'Ajouter') }}

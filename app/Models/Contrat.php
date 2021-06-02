@@ -14,19 +14,46 @@ class Contrat extends Model
     private $created_at;
     private $updated_at;
 
-    public function vehicule()
+    public function vehicule_leger()
     {
-      return $this->belongsTo(Vehicule::class, 'id_vehicule');
+      return $this->belongsTo(VehiculeLeger::class, 'id_vehicule');
+    }
+
+    public function vehicule_utilitaire()
+    {
+      return $this->belongsTo(VehiculeUtilitaire::class, 'id_vehicule');
     }
 
     public function conducteur()
     {
-      return $this->belongsTo(Conducteur::class, 'id_personne');
+      return $this->belongsTo(Conducteur::class, 'id_conducteur');
     }
 
     public function employe()
     {
-      return $this->belongsTo(Employe::class, 'id_personne');
+      return $this->belongsTo(Employe::class, 'id_employe');
+    }
+
+    public function getVehicule() {
+        if ($this->type_vehicule == 'vehicule_leger') {
+            return VehiculeLeger::find($this->id_vehicule);
+        } else if ($this->type_vehicule == 'vehicule_utilitaire') {
+            return VehiculeUtilitaire::find($this->id_vehicule);
+        } else {
+            return null;
+        }
+    }
+
+    public function getInfo() {
+        $info = '';
+        if ($this->conducteur) {
+            $info .= $this->conducteur->nom.' '.$this->conducteur->prenom.($this->conducteur->est_particulier ?: ' ('.$this->conducteur->personneMorale->societe.') ');
+        }
+        if ($this->getVehicule()) {
+            $info .= $this->getVehicule()->getInfoVehicule();
+        }
+
+        return $info;
     }
 
     public function getVehiculeId(string $vehicule_id)

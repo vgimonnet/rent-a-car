@@ -14,7 +14,7 @@ class CreateConducteursTable extends Migration
     public function up()
     {
         Schema::create('conducteurs', function (Blueprint $table) {
-            $table->id('id_personne');
+            $table->id('id_conducteur');
             $table->boolean('est_particulier')->nullable();
             $table->timestamps();
         });

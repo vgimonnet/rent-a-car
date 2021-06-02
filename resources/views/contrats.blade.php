@@ -18,10 +18,10 @@
                     <ul class="grid grid-cols-1 gap-10">
                         @foreach($contrats as $contrat)
                             <li class="flex">
-                                <a href="{{ route('contrat', $contrat->id) }}">{{ $contrat->id }}</a>
+                                <a href="{{ route('contrat', $contrat->id_contrat) }}">{{ $contrat->getInfo() }}</a>
                                 <div class="ml-auto">
-                                    <a href="{{ route('modifierContrat', $contrat->id) }}">Modifier</a>
-                                    <a href="{{ route('supprimerContrat', $contrat->id) }}">Supprimer</a>
+                                    <a href="{{ route('modifierContrat', $contrat->id_contrat) }}">Modifier</a>
+                                    <a href="{{ route('supprimerContrat', $contrat->id_contrat) }}">Supprimer</a>
                                     <!-- TODO : ajouter garde fou, modal de confirmation ? -->
                                 </div>
                             </li>

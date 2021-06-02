@@ -44,8 +44,8 @@
                                     <li class="flex">
                                         {{ $personne->nom }}
                                         <div class="ml-auto">
-                                            <a href="{{ route('ModifierPersonnePhysique', ['id' => $personne->id_personne, 'type' => 'personne_physique']) }}">Modifier</a>
-                                            <a href="{{ route('SupprimerPersonnePhysique', ['id' => $personne->id_personne, 'type' => 'personne_physique']) }}">Supprimer</a>
+                                            <a href="{{ route('ModifierPersonnePhysique', ['id' => $personne->id_conducteur, 'type' => 'personne_physique']) }}">Modifier</a>
+                                            <a href="{{ route('SupprimerPersonnePhysique', ['id' => $personne->id_conducteur, 'type' => 'personne_physique']) }}">Supprimer</a>
                                             <!-- TODO : ajouter garde fou, modal de confirmation ? -->
                                         </div>
                                     </li>
@@ -60,8 +60,8 @@
                                         {{ $personne->nom }}
                                         {{ '(société : '.$personne->personneMorale->societe.')' }}
                                         <div class="ml-auto">
-                                            <a href="{{ route('ModifierPersonnePhysique', ['id' => $personne->id_personne, 'type' => 'conducteur']) }}">Modifier</a>
-                                            <a href="{{ route('SupprimerPersonnePhysique', ['id' => $personne->id_personne, 'type' => 'conducteur']) }}">Supprimer</a>
+                                            <a href="{{ route('ModifierPersonnePhysique', ['id' => $personne->id_conducteur, 'type' => 'conducteur']) }}">Modifier</a>
+                                            <a href="{{ route('SupprimerPersonnePhysique', ['id' => $personne->id_conducteur, 'type' => 'conducteur']) }}">Supprimer</a>
                                             <!-- TODO : ajouter garde fou, modal de confirmation ? -->
                                         </div>
                                     </li>

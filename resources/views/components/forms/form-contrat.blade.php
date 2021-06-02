@@ -23,7 +23,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     @php
                         if ($redirect == 'modifierContrat') {
-                            $redirect = array($redirect, $contrat->id);
+                            $redirect = array($redirect, $contrat->id_contrat);
                         }
                         if (!isset($contrat)) {
                             $contrat = null;
@@ -31,9 +31,22 @@
                     @endphp
                     {!! Form::open(['route' => $redirect]) !!}
                         <div class="grid grid-cols-1 md:grid-cols-2">
-                            {{ Form::select('vehiculeId', $vehicules) }}
-                            {{ Form::select('conducteurId', $conducteurs) }}
-                            {{ Form::select('employeId', $employes) }}
+                            {{ Form::label('conducteurId', 'Conducteur') }}
+                            {{ Form::select('conducteurId', $conducteurs, $contrat ? $contrat->id_conducteur : null) }}
+                            {{ Form::label('employeId', 'Employé') }}
+                            {{ Form::select('employeId', $employes, $contrat ? $contrat->id_employe : null) }}
+                            {{ Form::label('vehiculeId', 'Véhicule') }}
+                            {{ Form::select('vehiculeId', $vehicules, $contrat ? $contrat->id_vehicule.'@'.$contrat->type_vehicule : null) }}
+                            {{ Form::label('dateDebut', 'Date de début') }}
+                            {{ Form::date('dateDebut', $contrat ? $contrat->date_debut : null) }}
+                            {{ Form::label('dateFin', 'Date de fin prévu') }}
+                            {{ Form::date('dateFin', $contrat ? $contrat->date_fin : null) }}
+                            {{ Form::label('dateRetour', 'Date de retour') }}
+                            {{ Form::date('dateRetour', $contrat ? $contrat->date_retour : null) }}
+                            {{ Form::label('motif', 'Motif') }}
+                            {{ Form::text('motif', $contrat ? $contrat->motif : null) }}
+                            {{ Form::label('montantPaye', 'Montant déjà payé') }}
+                            {{ Form::number('montantPaye', $contrat ? $contrat->montant_paye : null) }}
                         </div>
                         <div class="text-center w-full">
                             {{ Form::submit($contrat ? 'Modifier' : 'Ajouter') }}

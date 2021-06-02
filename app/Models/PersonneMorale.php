@@ -17,7 +17,7 @@ class PersonneMorale extends Model
     }
 
     public function conducteurs() {
-        return $this->hasMany(Conducteur::class, 'id_personne');
+        return $this->hasMany(Conducteur::class, 'id_conducteur');
     }
 
     public function delete() {

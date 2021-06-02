@@ -23,7 +23,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     @php
                         if ($redirect == 'ModifierPersonne') {
-                            $redirect = array($redirect, $personne->id_personne);
+                            $redirect = array($redirect, $personne->id_conducteur);
                         }
                         if (!isset($personne)) {
                             $personne = null;

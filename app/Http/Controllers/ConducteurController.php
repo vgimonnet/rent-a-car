@@ -28,27 +28,6 @@ class ConducteurController extends Controller
      */
     public function create($type = 'personne_physique')
     {
-        /*$personnes = [];
-
-        foreach (Personne::all() as $personne) {
-          $personnes[$personne->id_personne] = $personne->id_personne;
-        }
-
-        $personnesMorale = [];
-
-        foreach (PersonneMorale::all() as $personne) {
-          $personnesMorale[$personne->id_personne_morale] = $personne->id_personne_morale;
-        }
-
-        return view(
-          'components/forms/form-conducteur',
-          [
-            'redirect' => 'ajouterConducteur',
-            'conducteur' => null,
-            'personnes' => $personnes,
-            'personnesMorale' => $personnesMorale
-          ]
-          );*/
           
         if ($type == 'personne_physique') {
             $params = [
@@ -93,15 +72,6 @@ class ConducteurController extends Controller
             'codePostal' => 'required|integer',
         ]);
 
-        /*if ($request->est_particulier === 'on') {
-          $conducteur->est_particulier = 1;
-          $conducteur->id_personne = $request->id_personne;
-        } else {
-          $conducteur->est_particulier = 0;
-          $conducteur->id_personne = $request->id_personne_morale;
-        }
-        $conducteur->save();
-        return redirect()->route('conducteurs');*/
         $conducteur = new Conducteur();
         $conducteur->prenom = $request->prenom;
         $conducteur->nom = $request->nom;
@@ -152,28 +122,6 @@ class ConducteurController extends Controller
     public function edit($id, $type = 'personne_physique')
     {
 
-        /*$personnes = [];
-
-        foreach (Personne::all() as $personne) {
-          $personnes[$personne->id_personne] = $personne->id_personne;
-        }
-
-        $personnesMorale = [];
-
-        foreach (PersonneMorale::all() as $personne) {
-          $personnesMorale[$personne->id_personne_morale] = $personne->id_personne_morale;
-        }
-
-        return view(
-          'components/forms/form-conducteur',
-          [
-            'redirect' => 'modifierConducteur',
-            'conducteur' => Conducteur::find($id),
-            'personnes' => $personnes,
-            'personnesMorale' => $personnesMorale
-          ]
-          );*/
-
         if ($type == 'personne_physique') {
             $params = [
                 'type' => 'personne_physique',
@@ -218,15 +166,6 @@ class ConducteurController extends Controller
         ]);
 
         $conducteur = Conducteur::find($id);
-        /*if ($request->est_particulier === 'on') {
-          $conducteur->est_particulier = 1;
-          $conducteur->id_personne = $request->id_personne;
-        } else {
-          $conducteur->est_particulier = 0;
-          $conducteur->id_personne = $request->id_personne_morale;
-        }
-        $conducteur->save();
-        return redirect()->route('conducteurs');*/
         
         $conducteur->nom = $request->nom;
         $conducteur->prenom = $request->prenom;
