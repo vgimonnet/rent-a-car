@@ -21,7 +21,9 @@ class CreateControlesEtatTable extends Migration
             $table->string('etat_exterieur');
             $table->string('etat_interieur');
             $table->boolean('frais_a_prevoir');
+            $table->string('type');
             $table->foreignId('id_employe')->nullable();//->references('id_employe')->on('employes');;
+            $table->foreignId('id_contrat')->nullable();//->references('id_employe')->on('employes');;
         });
     }
 

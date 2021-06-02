@@ -18,7 +18,7 @@
                     <ul class="grid grid-cols-1 gap-10">
                         @foreach($controlesEtat as $controle)
                             <li class="flex">
-                                <a href="{{ route('controleEtat', $controle->id_controle_etat) }}">{{ $controle->id_controle_etat }}</a>
+                                <a href="{{ route('controleEtat', $controle->id_controle_etat) }}">{{ $controle->getInfo() }}</a>
                                 <div class="ml-auto">
                                     <a href="{{ route('modifierControleEtat', $controle->id_controle_etat) }}">Modifier</a>
                                     <a href="{{ route('supprimerControleEtat', $controle->id_controle_etat) }}">Supprimer</a>

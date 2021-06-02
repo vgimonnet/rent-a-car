@@ -21,7 +21,7 @@ class Employe extends Personne
         return $this->hasOne(Coordonnee::class, 'id_coordonnee');
     }
 
-    public function controle_etat()
+    public function controles_etat()
     {
         return $this->hasMany(ControleEtat::class, 'id_controle_etat');
     }

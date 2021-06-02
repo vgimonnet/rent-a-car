@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contrat;
 use App\Models\ControleEtat;
 use App\Models\Employe;
 use Illuminate\Http\Request;
@@ -26,9 +27,13 @@ class ControleEtatController extends Controller
     public function create()
     {
         $employes = [];
-
         foreach (Employe::all() as $employe) {
-          $employes[$employe->id_employe] = $employe->id_employe;
+          $employes[$employe->id_employe] = $employe->nom.' '.$employe->prenom.' ('.$employe->poste.')';
+        }
+
+        $contrats = [];
+        foreach (Contrat::all() as $contrat) {
+          $contrats[$contrat->id_contrat] = $contrat->getInfo();
         }
 
         return view(
@@ -36,7 +41,8 @@ class ControleEtatController extends Controller
           [
             'redirect' => 'ajouterControleEtat',
             'controle' => null,
-            'employes' => $employes
+            'employes' => $employes,
+            'contrats' => $contrats
           ]
         );
     }
@@ -50,11 +56,12 @@ class ControleEtatController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+          'id_contrat' => 'required',
+          'id_employe' => 'required',
           'date' => 'required|min:1',
           'kilometrage' => 'required|min:1',
           'etatExterieur' => 'required|min:1',
           'etatInterieur' => 'required|min:1',
-          'fraisAPrevoir' => 'required|min:1',
         ]);
 
         $controle = new ControleEtat;
@@ -62,9 +69,23 @@ class ControleEtatController extends Controller
         $controle->kilometrage = $request->kilometrage;
         $controle->etat_exterieur = $request->etatExterieur;
         $controle->etat_interieur = $request->etatInterieur;
-        $controle->frais_a_prevoir = $request->fraisAPrevoir;
+        $controle->frais_a_prevoir = $request->fraisAPrevoir ? 1 : 0;
+        $controle->type = $request->type;
+        
+        $employe = Employe::find($request->id_employe);
         $controle->id_employe = $request->id_employe;
+        $employe->controles_etat()->save($controle);
+        
+        $contrat = Contrat::find($request->id_contrat);
+        $controle->id_contrat = $request->id_contrat;
+        if ($request->type == 'entree') {
+          $contrat->controle_etat_entree()->save($controle);
+        } else if ($request->type == 'sortie') {
+          $contrat->controle_etat_sortie()->save($controle);
+        }
+
         $controle->save();
+
         return redirect()->route('controlesEtat');
     }
 
@@ -89,9 +110,13 @@ class ControleEtatController extends Controller
     public function edit($id)
     {
         $employes = [];
-
         foreach (Employe::all() as $employe) {
-          $employes[$employe->id_employe] = $employe->id_employe;
+          $employes[$employe->id_employe] = $employe->nom.' '.$employe->prenom.' ('.$employe->poste.')';
+        }
+
+        $contrats = [];
+        foreach (Contrat::all() as $contrat) {
+          $contrats[$contrat->id_contrat] = $contrat->getInfo();
         }
 
         return view(
@@ -99,7 +124,8 @@ class ControleEtatController extends Controller
           [
             'redirect' => 'modifierControleEtat',
             'controle' => ControleEtat::find($id),
-            'employes' => $employes
+            'employes' => $employes,
+            'contrats' => $contrats
           ]
         );
     }
@@ -113,23 +139,38 @@ class ControleEtatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-          'date' => 'required|min:1',
-          'kilometrage' => 'required|min:1',
-          'etatExterieur' => 'required|min:1',
-          'etatInterieur' => 'required|min:1',
-          'fraisAPrevoir' => 'required|min:1',
-        ]);
+      $validated = $request->validate([
+        'id_contrat' => 'required',
+        'id_employe' => 'required',
+        'date' => 'required|min:1',
+        'kilometrage' => 'required|min:1',
+        'etatExterieur' => 'required|min:1',
+        'etatInterieur' => 'required|min:1',
+      ]);
 
-        $controle = ControleEtat::find($id);
-        $controle->date = $request->date;
-        $controle->kilometrage = $request->kilometrage;
-        $controle->etatExterieur = $request->etatExterieur;
-        $controle->etatInterieur = $request->etatInterieur;
-        $controle->fraisAPrevoir = $request->fraisAPrevoir;
-        $controle->id_employe = $request->id_employe;
-        $controle->save();
-        return redirect()->route('controlesEtat');
+      $controle = ControleEtat::find($id);
+      $controle->date = $request->date;
+      $controle->kilometrage = $request->kilometrage;
+      $controle->etat_exterieur = $request->etatExterieur;
+      $controle->etat_interieur = $request->etatInterieur;
+      $controle->frais_a_prevoir = $request->fraisAPrevoir ? 1 : 0;
+      $controle->type = $request->type;
+      
+      $employe = Employe::find($request->id_employe);
+      $controle->id_employe = $request->id_employe;
+      $employe->controles_etat()->save($controle);
+      
+      $contrat = Contrat::find($request->id_contrat);
+      $controle->id_contrat = $request->id_contrat;
+      if ($request->type == 'entree') {
+        $contrat->controle_etat_entree()->save($controle);
+      } else if ($request->type == 'sortie') {
+        $contrat->controle_etat_sortie()->save($controle);
+      }
+
+      $controle->save();
+
+      return redirect()->route('controlesEtat');
     }
 
     /**

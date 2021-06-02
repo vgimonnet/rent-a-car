@@ -23,7 +23,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     @php
                         if ($redirect == 'modifierControleEtat') {
-                            $redirect = array($redirect, $controle->id);
+                            $redirect = array($redirect, $controle->id_controle_etat);
                         }
                         if (!isset($controle)) {
                             $controle = null;
@@ -31,12 +31,22 @@
                     @endphp
                     {!! Form::open(['route' => $redirect]) !!}
                         <div class="grid grid-cols-1 md:grid-cols-2">
-                            {{ Form::select('id_employe', $employes) }}
+                            {{ Form::label('id_contrat', 'Contrat') }}
+                            {{ Form::select('id_contrat', $contrats, $controle ? $controle->id_contrat : null) }}
+                            {{ Form::label('id_employe', 'Employé') }}
+                            {{ Form::select('id_employe', $employes, $controle ? $controle->id_employe : null) }}
+                            {{ Form::label('type', 'Entrée ou sortie') }}
+                            {{ Form::select('type', ['entree' => 'Entrée', 'sortie' => 'Sortie']) }}
+                            {{ Form::label('date', 'Date') }}
                             {{ Form::date('date', $controle ? $controle->date : null, ['placeholder' => 'Date']) }}
+                            {{ Form::label('kilometrage', 'Kilométrage') }}
                             {{ Form::text('kilometrage', $controle ? $controle->kilometrage : null, ['placeholder' => 'Kilometrage']) }}
-                            {{ Form::text('etatExterieur', $controle ? $controle->etatExterieur : null, ['placeholder' => 'état extérieur']) }}
-                            {{ Form::text('etatInterieur', $controle ? $controle->etatInterieur : null, ['placeholder' => 'état intérieur']) }}
-                            {{ Form::text('fraisAPrevoir', $controle ? $controle->fraisAPrevoir : null, ['placeholder' => 'frais à prévoir']) }}
+                            {{ Form::label('etatExterieur', 'Etat extérieur') }}
+                            {{ Form::text('etatExterieur', $controle ? $controle->etat_exterieur : null, ['placeholder' => 'état extérieur']) }}
+                            {{ Form::label('etatInterieur', 'Etat intérieur') }}
+                            {{ Form::text('etatInterieur', $controle ? $controle->etat_interieur : null, ['placeholder' => 'état intérieur']) }}
+                            {{ Form::label('fraisAPrevoir', 'Frais à prévoir') }}
+                            {{ Form::checkbox('fraisAPrevoir', $controle ? $controle->frais_a_prevoir : null, ['checked' => $controle ? $controle->fraisAPrevoir : false]) }}
                         </div>
                         <div class="text-center w-full">
                             {{ Form::submit($controle ? 'Modifier' : 'Ajouter') }}

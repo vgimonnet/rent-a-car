@@ -34,6 +34,14 @@ class Contrat extends Model
       return $this->belongsTo(Employe::class, 'id_employe');
     }
 
+    public function controle_etat_sortie() {
+        return $this->hasOne(ControleEtat::class, 'id_controle_etat');
+    }
+
+    public function controle_etat_entree() {
+        return $this->hasOne(ControleEtat::class, 'id_controle_etat');
+    }
+
     public function getVehicule() {
         if ($this->type_vehicule == 'vehicule_leger') {
             return VehiculeLeger::find($this->id_vehicule);
