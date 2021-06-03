@@ -71,9 +71,10 @@ class ControleTechniqueController extends Controller
           $vehicule = VehiculeUtilitaire::where('immatriculation', '=', $request->immatriculation)->get();
         }
 
-        if (sizeof($vehicule) > 0) {
-          $vehicule[0]->controles_technique()->save($controle);
-        }
+        // if (sizeof($vehicule) > 0) {
+        //   $vehicule[0]->controles_technique()->save($controle);
+        // }
+        $controle->save();
 
         return redirect()->route('controlesTechnique');
     }

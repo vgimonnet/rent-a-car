@@ -32,7 +32,7 @@ class ContratController extends Controller
         $conducteurs = [];
 
         foreach (Conducteur::all() as $conducteur) {
-          $conducteurs[$conducteur->id_conducteur] = strtoupper($conducteur->nom).' '.$conducteur->prenom.(!$conducteur->estParticulier?:' ('.$conducteur->personneMorale->societe.')');
+          $conducteurs[$conducteur->id_conducteur] = strtoupper($conducteur->nom).' '.$conducteur->prenom.($conducteur->est_particulier ? '' :' ('.$conducteur->personneMorale->societe.')');
         }
 
         $employes = [];
@@ -43,10 +43,10 @@ class ContratController extends Controller
 
         $vehicules = [];
         foreach (VehiculeLeger::where('disponible', '=', 1)->get() as $vehicule) {
-          $vehicules[$vehicule->id_vehicule.'@vehicule_leger'] = strtoupper($vehicule->marque).' '.$vehicule->model.' ('.$vehicule->immatriculation.')';
+          $vehicules[$vehicule->id_vehicule.'@vehicule_leger'] = strtoupper($vehicule->marque).' '.$vehicule->modele.' ('.$vehicule->immatriculation.')';
         }
         foreach (VehiculeUtilitaire::where('disponible', '=', 1)->get() as $vehicule) {
-          $vehicules[$vehicule->id_vehicule.'@vehicule_utilitaire'] = strtoupper($vehicule->marque).' '.$vehicule->model.' ('.$vehicule->immatriculation.')';
+          $vehicules[$vehicule->id_vehicule.'@vehicule_utilitaire'] = strtoupper($vehicule->marque).' '.$vehicule->modele.' ('.$vehicule->immatriculation.')';
         }
 
         return view(

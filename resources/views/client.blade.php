@@ -42,7 +42,7 @@
                             <ul>
                                 @foreach ($personnesPhysiques as $personne)
                                     <li class="flex">
-                                        {{ $personne->nom }}
+                                        {{ strtoupper($personne->nom) }} {{ $personne->prenom }} 
                                         <div class="ml-auto">
                                             <a href="{{ route('ModifierPersonnePhysique', ['id' => $personne->id_conducteur, 'type' => 'personne_physique']) }}">Modifier</a>
                                             <a href="{{ route('SupprimerPersonnePhysique', ['id' => $personne->id_conducteur, 'type' => 'personne_physique']) }}">Supprimer</a>

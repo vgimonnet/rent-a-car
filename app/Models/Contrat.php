@@ -53,7 +53,7 @@ class Contrat extends Model
     public function getInfo() {
         $info = '';
         if ($this->conducteur) {
-            $info .= $this->conducteur->nom.' '.$this->conducteur->prenom.($this->conducteur->est_particulier ?: ' ('.$this->conducteur->personneMorale->societe.') ');
+            $info .= $this->conducteur->nom.' '.$this->conducteur->prenom.($this->conducteur->est_particulier ? ' ' : ' ('.$this->conducteur->personneMorale->societe.') ');
         }
         if ($this->getVehicule()) {
             $info .= $this->getVehicule()->getInfoVehicule();
