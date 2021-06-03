@@ -19,7 +19,7 @@
                         {{ __('Contrats') }}
                     </x-nav-link>
                     <x-nav-link :href="route('client')" :active="request()->routeIs('client')">
-                        {{ __('Client') }}
+                        {{ __('Clients') }}
                     </x-nav-link>
                     <x-nav-link :href="route('vehicules')" :active="request()->routeIs('vehicules')">
                         {{ __('Véhicules') }}

@@ -24,8 +24,7 @@
                                 @foreach($vehiculesLeger as $vehicule)
                                     <li class="flex">
                                         <a href="{{ route('vehicule', ['id' => $vehicule->id_vehicule, 'type' => 'vehicule_leger']) }}">
-                                            {{ $vehicule->immatriculation }}
-                                            {{ $vehicule->marque }} - {{ $vehicule->modele }}
+                                            {{ $vehicule->marque }} - {{ $vehicule->modele }} ({{ $vehicule->immatriculation }} )
                                         </a>
                                         <div class="ml-auto">
                                             <a href="{{ route('ModifierVehicule', ['id' => $vehicule->id_vehicule, 'type' => 'vehicule_leger']) }}">Modifier</a>

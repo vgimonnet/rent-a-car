@@ -13,7 +13,7 @@
                         <b>Immatriculation : </b> {{ $vehicule->immatriculation }}
                     </p>
                     <p>
-                        <b>Est disponible : </b> {{ $vehicule->est_disponible ? 'Oui' : 'Non' }}
+                        <b>Est disponible : </b> {{ $vehicule->disponible ? 'Oui' : 'Non' }}
                     </p>
                     <p>
                         <b>Poid : </b> {{ $vehicule->poid.' kg' }}
