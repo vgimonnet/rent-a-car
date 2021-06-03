@@ -42,10 +42,10 @@ class ContratController extends Controller
         }
 
         $vehicules = [];
-        foreach (VehiculeLeger::all() as $vehicule) {
+        foreach (VehiculeLeger::where('disponible', '=', 1)->get() as $vehicule) {
           $vehicules[$vehicule->id_vehicule.'@vehicule_leger'] = strtoupper($vehicule->marque).' '.$vehicule->model.' ('.$vehicule->immatriculation.')';
         }
-        foreach (VehiculeUtilitaire::all() as $vehicule) {
+        foreach (VehiculeUtilitaire::where('disponible', '=', 1)->get() as $vehicule) {
           $vehicules[$vehicule->id_vehicule.'@vehicule_utilitaire'] = strtoupper($vehicule->marque).' '.$vehicule->model.' ('.$vehicule->immatriculation.')';
         }
 
