@@ -65,7 +65,7 @@ Route::post('/ajouter/vehicule/{type}', [VehiculeController::class, 'store'])->m
 Route::get('/modifier/vehicule/{id}/{type}', [VehiculeController::class, 'edit'])->middleware(['auth'])->name('ModifierVehicule');
 Route::post('/modifier/vehicule/{id}/{type}', [VehiculeController::class, 'update'])->middleware(['auth'])->name('ModifierVehicule');
 Route::get('/supprimer/vehicule/{id}/{type}', [VehiculeController::class, 'destroy'])->middleware(['auth'])->name('SupprimerVehicule');
-Route::get('/vehicules/{id}', [VehiculeController::class, 'show'])->name('vehicule');
+Route::get('/vehicules/{id}/{type}', [VehiculeController::class, 'show'])->name('vehicule');
 
 Route::get('/contrats', [ContratController::class, 'index'])->name('contrats');
 Route::get('/contrats/new', [ContratController::class, 'create'])->middleware(['auth'])->name('ajouterContrat');

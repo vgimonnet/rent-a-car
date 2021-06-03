@@ -25,4 +25,8 @@ class Employe extends Personne
     {
         return $this->hasMany(ControleEtat::class, 'id_controle_etat');
     }
+
+    public function getInfo() {
+        return strtoupper($this->nom).' '.$this->prenom.' (Poste : '.$this->poste.')';
+    }
 }

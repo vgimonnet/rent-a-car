@@ -107,10 +107,12 @@ class ContratController extends Controller
         $contrat->id_vehicule = $vehiculeInfo[0];
         if ($vehiculeInfo[1] == 'leger') {
           $vehicule = VehiculeLeger::find($vehiculeInfo[0]);
+          $vehicule->est_disponible = false;
           $contrat->type_vehicule = 'vehicule_leger';
           $contrat->montant = $days * $vehicule->cout_par_jour;
         } else {
           $vehicule = VehiculeUtilitaire::find($vehiculeInfo[0]);
+          $vehicule->est_disponible = false;
           $contrat->type_vehicule = 'vehicule_utilitaire';
           $contrat->montant = $days * $vehicule->cout_par_jour;
         }

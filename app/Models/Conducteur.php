@@ -24,4 +24,8 @@ class Conducteur extends Personne
     {
         return $this->hasMany(Contrat::class, 'id_contrat');
     }
+
+    public function getInfo() {
+        return strtoupper($this->nom).' '.$this->prenom.( $this->personneMorale ? ' (Société : '.$this->personneMorale->societe.')' : '');
+    }
 }

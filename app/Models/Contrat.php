@@ -61,4 +61,17 @@ class Contrat extends Model
 
         return $info;
     }
+
+    public function getControle($type ='sortie') {
+        $controle = ControleEtat::where([
+            ['id_contrat', '=', $this->id_contrat],
+            ['type', '=', $type]
+        ])->get();
+        
+        if (sizeof($controle) > 0) {
+            return $controle[0];
+        }
+
+        return null;
+    }
 }

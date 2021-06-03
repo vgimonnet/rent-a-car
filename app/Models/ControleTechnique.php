@@ -19,7 +19,7 @@ class ControleTechnique extends Model
 
     public function getVehicule() {
         $vehicule = VehiculeLeger::where('immatriculation', '=', $this->id_vehicule)->get();
-        if (empty($vehicule)) {
+        if (sizeof($vehicule) == 0) {
           $vehicule = VehiculeUtilitaire::where('immatriculation', '=', $this->id_vehicule)->get();
         }
         if(!empty($vehicule) && sizeof($vehicule) > 0) {

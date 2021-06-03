@@ -23,8 +23,10 @@
                             <ul>
                                 @foreach($vehiculesLeger as $vehicule)
                                     <li class="flex">
-                                        {{ $vehicule->immatriculation }}
-                                        {{ $vehicule->marque }} - {{ $vehicule->modele }}
+                                        <a href="{{ route('vehicule', ['id' => $vehicule->id_vehicule, 'type' => 'vehicule_leger']) }}">
+                                            {{ $vehicule->immatriculation }}
+                                            {{ $vehicule->marque }} - {{ $vehicule->modele }}
+                                        </a>
                                         <div class="ml-auto">
                                             <a href="{{ route('ModifierVehicule', ['id' => $vehicule->id_vehicule, 'type' => 'vehicule_leger']) }}">Modifier</a>
                                             <a href="{{ route('SupprimerVehicule', ['id' => $vehicule->id_vehicule, 'type' => 'vehicule_leger']) }}">Supprimer</a>
@@ -40,8 +42,10 @@
                             <ul>
                                 @foreach($vehiculesUtilitaire as $vehicule)
                                     <li class="flex">
-                                        {{ $vehicule->immatriculation }}
-                                        {{ $vehicule->marque }} - {{ $vehicule->modele }}
+                                        <a href="{{ route('vehicule', ['id' => $vehicule->id_vehicule, 'type' => 'vehicule_utilitaire']) }}">
+                                            {{ $vehicule->immatriculation }}
+                                            {{ $vehicule->marque }} - {{ $vehicule->modele }}
+                                        </a>
                                         <div class="ml-auto">
                                             <a href="{{ route('ModifierVehicule', ['id' => $vehicule->id_vehicule, 'type' => 'vehicule_utiliaire']) }}">Modifier</a>
                                             <a href="{{ route('SupprimerVehicule', ['id' => $vehicule->id_vehicule, 'type' => 'vehicule_utiliaire']) }}">Supprimer</a>

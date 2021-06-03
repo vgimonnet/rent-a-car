@@ -101,10 +101,14 @@ class VehiculeController extends Controller
      * @param  \App\Models\Vehicule  $vehicule
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $type = 'vehicule_leger')
     {
-        $vehicule = Vehicule::find($id);
-        return view('components/single', ['single' => $vehicule]);
+      if ($type == 'vehicule_leger') {
+        $vehicule = VehiculeLeger::find($id);
+      } elseif ($type == 'vehicule_utilitaire') {
+        $vehicule = VehiculeUtilitaire::find($id);
+      }
+        return view('vehicule', ['vehicule' => $vehicule, 'type' => $type]);
     }
 
     /**

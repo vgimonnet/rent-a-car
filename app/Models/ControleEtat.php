@@ -25,4 +25,8 @@ class ControleEtat extends Model
         $contrat = $this->contrat;
         return $this->contrat->getInfo().' '.($this->type == 'entree'  ? ' (Contrôle d\'entrée)' : ' (Contrôle de sortie)');
     }
+
+    public function getInfoControle() {
+        return $this->date.' '.$this->kilometrage.'km, état extérieur : '.$this->etat_exterieur.', état intérieur : '.$this->etat_interieur;
+    }
 }
