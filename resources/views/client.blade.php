@@ -27,7 +27,7 @@
                                 @foreach ($personnesMorale as $personne)
                                     <li class="flex">
                                         {{ $personne->societe }}
-                                        {{ '('.$personne->conducteurs()->count(). ' conducteurs)' }}
+                                        {{ '('.$personne->getNbConducteurs(). ' conducteurs)' }}
                                         <div class="ml-auto">
                                             <a href="{{ route('ModifierPersonneMorale', $personne->id_personne_morale) }}">Modifier</a>
                                             <a href="{{ route('SupprimerPersonneMorale', $personne->id_personne_morale) }}">Supprimer</a>

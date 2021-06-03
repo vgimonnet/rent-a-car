@@ -26,4 +26,8 @@ class PersonneMorale extends Model
 
         return parent::delete();
     }
+
+    public function getNbConducteurs() {
+        return Conducteur::where('id_personne_morale', '=', $this->id_personne_morale)->get()->count();
+    }
 }
