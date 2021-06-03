@@ -90,12 +90,13 @@ class ConducteurController extends Controller
         $coordonnee->pays = $request->pays;
         $coordonnee->ville = $request->ville;
         $coordonnee->adresse = $request->adresse;
-        $coordonnee->complement = $request->complement;
+        $coordonnee->complement = $request->complement ? $request->complement : '';
         $coordonnee->codePostal = $request->codePostal;
 
         DB::transaction(function() use($conducteur, $coordonnee) {
             $conducteur->save();
-            $conducteur->coordonnee()->save($coordonnee);
+            $coordonnee->personne()->associate($coordonnee)->save();
+            // $conducteur->coordonnee()->save($coordonnee);
         });
 
         return redirect()->route('client');

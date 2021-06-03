@@ -19,6 +19,6 @@ class Coordonnee extends Model
 
     public function personne()
     {
-        return $this->belongsTo(Personne::class, 'id_personne');
+        return $this->belongsTo(Personne::class, 'id_conducteur');
     }
 }

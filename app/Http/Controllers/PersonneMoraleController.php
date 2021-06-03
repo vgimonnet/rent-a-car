@@ -67,12 +67,12 @@ class PersonneMoraleController extends Controller
         $coordonnee->pays = $request->pays;
         $coordonnee->ville = $request->ville;
         $coordonnee->adresse = $request->adresse;
-        $coordonnee->complement = $request->complement;
+        $coordonnee->complement = $request->complement ? $request->complement : '';
         $coordonnee->codePostal = $request->codePostal;
 
         DB::transaction(function() use($personneMorale, $coordonnee) {
             $personneMorale->save();
-            $personneMorale->coordonnee()->save($coordonnee);
+            $coordonnee->personneMorale()->associate($coordonnee)->save();
         });
 
         return redirect()->route('client');

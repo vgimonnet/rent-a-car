@@ -71,12 +71,13 @@ class EmployeController extends Controller
         $coordonnee->pays = $request->pays;
         $coordonnee->ville = $request->ville;
         $coordonnee->adresse = $request->adresse;
-        $coordonnee->complement = $request->complement;
+        $coordonnee->complement = $request->complement ? $request->complement : '';
         $coordonnee->codePostal = $request->codePostal;
 
         DB::transaction(function() use($employe, $coordonnee) {
             $employe->save();
-            $employe->coordonnee()->save($coordonnee);
+            // $employe->coordonnee()->save($coordonnee);
+            $coordonnee->personne()->associate($coordonnee)->save();
         });
 
         return redirect()->route('employes');
